@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b55">
+<title>دخل و خرج من</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+body{font-family:Tahoma;background:#f3f6f4;margin:0;padding:18px;color:#17231f}
+header{background:#176b55;color:white;padding:20px;border-radius:16px}
+h1{font-size:23px}
+section{background:white;padding:16px;border-radius:14px;margin-top:15px}
+input,select,button{width:100%;padding:13px;margin-top:10px;box-sizing:border-box;border:1px solid #ddd;border-radius:9px;font:inherit}
+button{background:#176b55;color:white;border:0;font-weight:bold}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.card{background:white;padding:12px;border-radius:12px;font-size:12px}
+.card strong{display:block;margin-top:10px;font-size:13px}
+.item{padding:12px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;gap:8px}
+.income{color:green}.expense{color:#c44}
+</style>
+</head>
+<body>
+<header>
+<h1>دخل و خرج من</h1>
+<p>مدیریت درآمد و هزینه‌های روزانه</p>
+</header>
+
+<div class="cards">
+<div class="card">درآمد<strong id="income">۰</strong></div>
+<div class="card">هزینه<strong id="expense">۰</strong></div>
+<div class="card">مانده<strong id="balance">۰</strong></div>
+</div>
+
+<section>
+<h3>ثبت تراکنش جدید</h3>
+<select id="type">
+<option value="expense">هزینه</option>
+<option value="income">درآمد</option>
+</select>
+<input id="amount" type="number" placeholder="مبلغ به تومان">
+<input id="reason" placeholder="بابت چی بوده؟">
+<input id="date" type="date">
+<button onclick="addEntry()">ذخیره تراکنش</button>
+</section>
+
+<section>
+<h3>لیست تراکنش‌ها</h3>
+<div id="list"></div>
+</section>
+
+<script>
+let entries=JSON.parse(localStorage.getItem('entries')||'[]');
+const money=n=>Number(n).toLocaleString('fa-IR');
+
+function render(){
+let income=entries.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
+let expense=entries.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+
+document.getElementById('income').textContent=money(income);
+document.getElementById('expense').textContent=money(expense);
+document.getElementById('balance').textContent=money(income-expense);
+
+let list=document.getElementById('list');
+list.innerHTML='';
+
+[...entries].reverse().forEach(x=>{
+let div=document.createElement('div');
+div.className='item';
+let info=document.createElement('span');
+info.textContent=x.reason+' | '+x.date;
+let value=document.createElement('strong');
+value.className=x.type;
+value.textContent=(x.type==='income'?'+':'-')+money(x.amount);
+div.append(info,value);
+list.append(div);
+});
+}
+
+function addEntry(){
+let amount=Number(document.getElementById('amount').value);
+let reason=document.getElementById('reason').value.trim();
+let date=document.getElementById('date').value;
+let type=document.getElementById('type').value;
+
+if(amount<=0||!reason||!date){
+alert('تمام اطلاعات را وارد کن');
+return;
+}
+
+entries.push({amount,reason,date,type});
+localStorage.setItem('entries',JSON.stringify(entries));
+document.getElementById('amount').value='';
+document.getElementById('reason').value='';
+render();
+}
+
+document.getElementById('date').value=new Date().toISOString().slice(0,10);
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+render();
+</script>
+</body>
+</html>
