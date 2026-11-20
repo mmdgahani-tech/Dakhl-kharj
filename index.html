@@ -1,106 +1,283 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#176b55">
 <title>دخل و خرج من</title>
 <link rel="manifest" href="manifest.webmanifest">
 <style>
-body{font-family:Tahoma;background:#f3f6f4;margin:0;padding:18px;color:#17231f}
-header{background:#176b55;color:white;padding:20px;border-radius:16px}
-h1{font-size:23px}
-section{background:white;padding:16px;border-radius:14px;margin-top:15px}
-input,select,button{width:100%;padding:13px;margin-top:10px;box-sizing:border-box;border:1px solid #ddd;border-radius:9px;font:inherit}
-button{background:#176b55;color:white;border:0;font-weight:bold}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.card{background:white;padding:12px;border-radius:12px;font-size:12px}
-.card strong{display:block;margin-top:10px;font-size:13px}
-.item{padding:12px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;gap:8px}
-.income{color:green}.expense{color:#c44}
+:root{--bg:#f3f6f4;--panel:#fff;--ink:#1c2923;--accent:#176b55;--muted:#718078}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;max-width:720px;margin:auto}
+header{background:var(--accent);color:white;border-radius:18px;padding:18px}
+h1{font-size:22px;margin:0 0 6px}
+header p{font-size:13px;margin:0;opacity:.9}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.card,section{background:var(--panel);border-radius:15px;padding:14px;box-shadow:0 2px 9px #0000000a}
+.card small{display:block;color:var(--muted);font-size:11px;margin-bottom:8px}
+.card strong{font-size:13px;direction:ltr;display:block;text-align:right;overflow-wrap:anywhere}
+section{margin:12px 0}
+h2{font-size:17px;margin:0 0 12px}
+label{display:block;font-size:13px;margin:10px 0 5px}
+input,select,button{width:100%;padding:12px;border:1px solid #d8e1dc;border-radius:10px;background:var(--panel);color:var(--ink);font:inherit}
+button{background:var(--accent);color:white;border:0;font-weight:bold;cursor:pointer;margin-top:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.entry{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #e9eeeb}
+.entry:last-child{border:0}
+.entry small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.amount{direction:ltr;text-align:left;white-space:nowrap;font-weight:bold}
+.income{color:#16834f}
+.expense{color:#c04a4a}
+.del{width:auto;background:#f3e8e8;color:#a33;padding:6px 9px;margin-top:6px;font-size:11px}
+.muted{color:var(--muted);font-size:12px}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:430px){
+.cards{gap:5px}
+.card{padding:10px 7px}
+.card strong{font-size:11px}
+.grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+
 <header>
 <h1>دخل و خرج من</h1>
-<p>مدیریت درآمد و هزینه‌های روزانه</p>
+<p>مدیریت ساده درآمد و هزینه‌های روزانه</p>
 </header>
 
 <div class="cards">
-<div class="card">درآمد<strong id="income">۰</strong></div>
-<div class="card">هزینه<strong id="expense">۰</strong></div>
-<div class="card">مانده<strong id="balance">۰</strong></div>
+<div class="card"><small>مجموع درآمد</small><strong id="income">0</strong></div>
+<div class="card"><small>مجموع هزینه</small><strong id="expense">0</strong></div>
+<div class="card"><small>مانده</small><strong id="balance">0</strong></div>
 </div>
 
 <section>
-<h3>ثبت تراکنش جدید</h3>
+<h2>ثبت تراکنش</h2>
+<form id="form">
+<div class="grid">
+<div>
+<label>نوع تراکنش</label>
 <select id="type">
 <option value="expense">هزینه</option>
 <option value="income">درآمد</option>
 </select>
-<input id="amount" type="number" placeholder="مبلغ به تومان">
-<input id="reason" placeholder="بابت چی بوده؟">
-<input id="date" type="date">
-<button onclick="addEntry()">ذخیره تراکنش</button>
+</div>
+<div>
+<label>مبلغ (تومان)</label>
+<input id="amount" type="text" inputmode="numeric" placeholder="مثلاً 125,000" required>
+</div>
+</div>
+
+<label>بابت چی بوده؟</label>
+<input id="reason" maxlength="100" placeholder="مثلاً خرید روزانه" required>
+
+<div class="grid">
+<div>
+<label>تاریخ</label>
+<input id="date" type="date" required>
+<div class="muted" id="jalali"></div>
+</div>
+<div>
+<label>دسته‌بندی</label>
+<select id="category">
+<option>عمومی</option>
+<option>خوراک</option>
+<option>رفت‌وآمد</option>
+<option>خرید</option>
+<option>حقوق</option>
+<option>فروش</option>
+<option>قبض و خدمات</option>
+<option>سایر</option>
+</select>
+</div>
+</div>
+<button type="submit">ذخیره تراکنش</button>
+</form>
 </section>
 
 <section>
-<h3>لیست تراکنش‌ها</h3>
-<div id="list"></div>
+<h2>تراکنش‌ها</h2>
+<div id="list" class="muted">هنوز تراکنشی ثبت نشده است.</div>
+</section>
+
+<section>
+<h2>تنظیمات ظاهری</h2>
+<div class="settings">
+<div>
+<label>فونت</label>
+<select id="font">
+<option value="Tahoma,Arial,sans-serif">Tahoma</option>
+<option value="Arial,sans-serif">Arial</option>
+<option value="Georgia,serif">Georgia</option>
+<option value="system-ui,sans-serif">System</option>
+</select>
+</div>
+<div>
+<label>رنگ زمینه</label>
+<input id="bg" type="color" value="#f3f6f4">
+</div>
+<div>
+<label>رنگ اصلی</label>
+<input id="accent" type="color" value="#176b55">
+</div>
+</div>
+<button type="button" id="resetStyle">بازگشت به ظاهر پیش‌فرض</button>
 </section>
 
 <script>
-let entries=JSON.parse(localStorage.getItem('entries')||'[]');
-const money=n=>Number(n).toLocaleString('fa-IR');
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString('en-US');
 
-function render(){
-let income=entries.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
-let expense=entries.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+const jalali=s=>{
+if(!s)return '';
+const d=new Date(s+'T12:00:00');
+return new Intl.DateTimeFormat('en-US-u-ca-persian',{
+year:'numeric',month:'2-digit',day:'2-digit'
+}).format(d).replace(/\u200e/g,'');
+};
 
-document.getElementById('income').textContent=money(income);
-document.getElementById('expense').textContent=money(expense);
-document.getElementById('balance').textContent=money(income-expense);
+let entries=[];
+try{
+entries=JSON.parse(localStorage.getItem('dk_entries')||'[]');
+}catch(e){}
 
-let list=document.getElementById('list');
-list.innerHTML='';
+$('date').value=new Date().toISOString().slice(0,10);
 
-[...entries].reverse().forEach(x=>{
-let div=document.createElement('div');
-div.className='item';
-let info=document.createElement('span');
-info.textContent=x.reason+' | '+x.date;
-let value=document.createElement('strong');
-value.className=x.type;
-value.textContent=(x.type==='income'?'+':'-')+money(x.amount);
-div.append(info,value);
-list.append(div);
+function updateJ(){
+$('jalali').textContent='تاریخ شمسی: '+jalali($('date').value);
+}
+$('date').addEventListener('change',updateJ);
+updateJ();
+
+$('amount').addEventListener('input',e=>{
+let v=e.target.value.replace(/[^0-9]/g,'');
+e.target.value=v?fmt(v):'';
 });
-}
 
-function addEntry(){
-let amount=Number(document.getElementById('amount').value);
-let reason=document.getElementById('reason').value.trim();
-let date=document.getElementById('date').value;
-let type=document.getElementById('type').value;
-
-if(amount<=0||!reason||!date){
-alert('تمام اطلاعات را وارد کن');
-return;
-}
-
-entries.push({amount,reason,date,type});
-localStorage.setItem('entries',JSON.stringify(entries));
-document.getElementById('amount').value='';
-document.getElementById('reason').value='';
+function save(){
+localStorage.setItem('dk_entries',JSON.stringify(entries));
 render();
 }
 
-document.getElementById('date').value=new Date().toISOString().slice(0,10);
+function render(){
+let inc=entries.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0);
+let exp=entries.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0);
+
+$('income').textContent=fmt(inc)+' تومان';
+$('expense').textContent=fmt(exp)+' تومان';
+$('balance').textContent=fmt(inc-exp)+' تومان';
+
+let list=$('list');
+list.innerHTML='';
+
+if(!entries.length){
+list.textContent='هنوز تراکنشی ثبت نشده است.';
+return;
+}
+
+[...entries].reverse().forEach(x=>{
+let el=document.createElement('div');
+el.className='entry';
+
+let a=document.createElement('div');
+let b=document.createElement('div');
+
+let title=document.createElement('strong');
+title.textContent=x.reason;
+
+let meta=document.createElement('small');
+meta.textContent=x.category+' | '+jalali(x.date);
+
+a.append(title,meta);
+
+let val=document.createElement('div');
+val.className='amount '+x.type;
+val.textContent=(x.type==='income'?'+':'−')+fmt(x.amount);
+
+let del=document.createElement('button');
+del.className='del';
+del.textContent='حذف';
+del.onclick=()=>{
+if(confirm('این تراکنش حذف شود؟')){
+entries=entries.filter(y=>y.id!==x.id);
+save();
+}
+};
+
+b.append(val,del);
+el.append(a,b);
+list.append(el);
+});
+}
+
+$('form').addEventListener('submit',e=>{
+e.preventDefault();
+
+let amount=Number($('amount').value.replace(/,/g,''));
+let reason=$('reason').value.trim();
+let date=$('date').value;
+
+if(!amount||!reason||!date){
+alert('همه موارد را کامل کن');
+return;
+}
+
+entries.push({
+id:Date.now(),
+type:$('type').value,
+amount,
+reason,
+date,
+category:$('category').value
+});
+
+$('amount').value='';
+$('reason').value='';
+save();
+});
+
+function applySettings(){
+document.documentElement.style.setProperty('--bg',$('bg').value);
+document.documentElement.style.setProperty('--accent',$('accent').value);
+document.body.style.fontFamily=$('font').value;
+
+localStorage.setItem('dk_style',JSON.stringify({
+bg:$('bg').value,
+accent:$('accent').value,
+font:$('font').value
+}));
+}
+
+['bg','accent','font'].forEach(id=>{
+$(id).addEventListener('change',applySettings);
+});
+
+try{
+let s=JSON.parse(localStorage.getItem('dk_style')||'null');
+if(s){
+$('bg').value=s.bg;
+$('accent').value=s.accent;
+$('font').value=s.font;
+applySettings();
+}
+}catch(e){}
+
+$('resetStyle').onclick=()=>{
+$('bg').value='#f3f6f4';
+$('accent').value='#176b55';
+$('font').value='Tahoma,Arial,sans-serif';
+applySettings();
+};
 
 if('serviceWorker' in navigator){
+addEventListener('load',()=>{
 navigator.serviceWorker.register('./sw.js').catch(()=>{});
+});
 }
+
 render();
 </script>
 </body>
