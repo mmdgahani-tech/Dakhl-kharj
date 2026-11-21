@@ -1,64 +1,440 @@
-from pathlib import Path
 
-src = Path('/mnt/data/dakhl-kharj-redesign-personalized.html')
-html = src.read_text(encoding='utf-8')
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101522">
+<title>دخل و خرج من</title>
+<style>
+:root{
+ --bg:#101522;--panel:#192233;--panel2:#202c40;
+ --text:#f3f5fa;--muted:#91a0b6;--green:#27d6a0;
+ --red:#ff647c;--blue:#718cff;--gold:#f5c76b;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Tahoma,Arial,sans-serif;padding:18px;
+}
+.app{max-width:850px;margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;margin:12px 0 24px}
+.brand{font-size:23px;font-weight:bold}
+.brand span{color:var(--green)}
+.sub{font-size:12px;color:var(--muted);margin-top:7px}
+button{cursor:pointer;border:0;font-family:inherit}
+.settings{
+ background:var(--panel2);color:white;padding:11px 14px;
+ border-radius:12px;font-size:19px
+}
+.welcome{
+ background:linear-gradient(120deg,#263c58,#192a43);
+ padding:22px;border-radius:20px;margin-bottom:17px;
+ border:1px solid #344965;
+}
+.welcome small{color:#b6c7df}
+.welcome h2{margin:10px 0;font-size:26px}
+.date{font-size:12px;color:#b6c7df}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{
+ background:var(--panel);border:1px solid #29364a;
+ padding:17px;border-radius:17px;min-width:0;
+}
+.card small{color:var(--muted);font-size:12px}
+.amount{font-size:19px;font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.blue{color:#91a6ff}
+.section{margin-top:25px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+h3{font-size:16px;margin:0}
+.panel{
+ background:var(--panel);border:1px solid #29364a;
+ border-radius:17px;padding:17px;
+}
+.chart{display:flex;gap:17px;align-items:end;height:145px;margin-top:20px}
+.chart-col{flex:1;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:end;gap:8px}
+.bar-area{height:110px;display:flex;align-items:end;justify-content:center;gap:5px}
+.bar{width:32%;max-width:38px;border-radius:7px 7px 3px 3px;min-height:3px}
+.bar.in{background:var(--green)}
+.bar.out{background:var(--red)}
+.chart-label{font-size:11px;color:var(--muted)}
+.legend{display:flex;gap:18px;font-size:11px;color:var(--muted)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px}
+form{display:grid;gap:12px}
+.types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.type{
+ padding:13px;border-radius:12px;background:var(--panel2);
+ color:var(--muted);font-size:14px;border:1px solid transparent
+}
+.type.active.income{border-color:var(--green);color:var(--green)}
+.type.active.expense{border-color:var(--red);color:var(--red)}
+input,select{
+ width:100%;padding:14px;background:var(--panel2);
+ color:white;border:1px solid #35435b;border-radius:11px;
+ font-family:inherit;font-size:14px;outline:none;
+}
+input:focus,select:focus{border-color:var(--blue)}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:7px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.submit{
+ background:var(--green);color:#10241f;padding:15px;
+ border-radius:12px;font-size:15px;font-weight:bold;
+}
+.list{display:grid;gap:9px}
+.item{
+ background:var(--panel2);padding:14px;border-radius:13px;
+ display:flex;align-items:center;justify-content:space-between;gap:8px
+}
+.item-title{font-size:13px;font-weight:bold}
+.item-date{font-size:10px;color:var(--muted);margin-top:7px}
+.item-right{text-align:left;white-space:nowrap}
+.item-amount{font-size:13px;font-weight:bold}
+.delete{background:transparent;color:var(--red);font-size:18px;margin-right:8px}
+.empty{text-align:center;color:var(--muted);padding:25px;font-size:13px}
+.actions{display:flex;gap:7px}
+.action{
+ padding:7px 10px;border-radius:8px;background:#35435b;
+ color:white;font-size:11px
+}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:25px}
+dialog{
+ background:var(--panel);color:white;border:1px solid #40516a;
+ border-radius:18px;width:90%;max-width:400px;padding:22px;
+}
+dialog::backdrop{background:#000a}
+.modal-actions{display:flex;gap:8px;margin-top:15px}
+.modal-actions button{flex:1;padding:12px;border-radius:10px}
+@media(max-width:420px){
+ body{padding:13px}
+ .amount{font-size:16px}
+ .brand{font-size:20px}
+ .card{padding:14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div>
+  <div class="brand">◈ <span id="brandName">دخل و خرج من</span></div>
+  <div class="sub">مدیریت هوشمند دخل و خرج روزانه</div>
+ </div>
+ <button class="settings" onclick="openSettings()">⚙</button>
+</header>
 
-old = '''<div class="card"><div class="sectionhead"><h2>همه تراکنش‌ها</h2><span class="pill" id="reportCount">۰ مورد</span></div><div id="allList"></div></div>'''
-new = '''<div class="card">
-<div class="sectionhead"><h2>فیلتر گزارش</h2><span class="pill">شمسی</span></div>
-<label>نوع گزارش</label>
-<select id="reportMode" onchange="updateReportFilter()">
-<option value="all">همه تراکنش‌ها</option>
-<option value="day">گزارش روزانه</option>
-<option value="month">گزارش ماهانه</option>
-</select>
-<div class="grid2" id="reportDateFields">
-<div><label>سال شمسی</label><input id="reportYear" inputmode="numeric" maxlength="4" placeholder="1405"></div>
-<div><label>ماه</label><select id="reportMonth"><option value="1">فروردین</option><option value="2">اردیبهشت</option><option value="3">خرداد</option><option value="4">تیر</option><option value="5">مرداد</option><option value="6">شهریور</option><option value="7">مهر</option><option value="8">آبان</option><option value="9">آذر</option><option value="10">دی</option><option value="11">بهمن</option><option value="12">اسفند</option></select></div>
-<div id="reportDayWrap"><label>روز</label><input id="reportDay" inputmode="numeric" maxlength="2" placeholder="01"></div>
+<div class="welcome">
+ <small>موجودی کل حساب</small>
+ <h2 id="balance">۰</h2>
+ <div class="date" id="today"></div>
 </div>
-<button onclick="applyReportFilter()">نمایش گزارش</button>
+
+<div class="cards">
+ <div class="card">
+  <small>↗ مجموع درآمد این ماه</small>
+  <div class="amount green" id="incomeTotal">۰</div>
+ </div>
+ <div class="card">
+  <small>↘ مجموع هزینه این ماه</small>
+  <div class="amount red" id="expenseTotal">۰</div>
+ </div>
+ <div class="card">
+  <small>درآمد امروز</small>
+  <div class="amount green" id="todayIncome">۰</div>
+ </div>
+ <div class="card">
+  <small>هزینه امروز</small>
+  <div class="amount red" id="todayExpense">۰</div>
+ </div>
 </div>
-<div class="card"><div class="sectionhead"><h2 id="reportHeading">همه تراکنش‌ها</h2><span class="pill" id="reportCount">۰ مورد</span></div><div id="allList"></div></div>'''
-assert old in html
-html = html.replace(old, new)
 
-# Replace report summary update in renderAll with filtered report calculations
-old2 = '''['incomeTotal','reportIncome'].forEach(id=>$(id).textContent=fmt(t.inc));['expenseTotal','reportExpense'].forEach(id=>$(id).textContent=fmt(t.exp));['balanceTotal','balanceTotal2','reportBalance'].forEach(id=>$(id).textContent=fmt(t.bal));$('heroBalance').textContent=fmt(t.bal)+' تومان';$('countTotal').textContent=fmt(entries.length);$('reportCount').textContent=fmt(entries.length)+' مورد';$('avgExpense').textContent=fmt(entries.filter(x=>x.type==='expense').length?t.exp/entries.filter(x=>x.type==='expense').length:0);let sorted=[...entries].sort((a,b)=>b.id-a.id);fillList('recentList',sorted.slice(0,4));fillList('allList',sorted);drawLine('lineChart');drawLine('lineChart2');drawDonut()}'''
-new2 = '''['incomeTotal'].forEach(id=>$(id).textContent=fmt(t.inc));['expenseTotal'].forEach(id=>$(id).textContent=fmt(t.exp));['balanceTotal','balanceTotal2'].forEach(id=>$(id).textContent=fmt(t.bal));$('heroBalance').textContent=fmt(t.bal)+' تومان';$('countTotal').textContent=fmt(entries.length);$('avgExpense').textContent=fmt(entries.filter(x=>x.type==='expense').length?t.exp/entries.filter(x=>x.type==='expense').length:0);let sorted=[...entries].sort((a,b)=>b.id-a.id);fillList('recentList',sorted.slice(0,4));drawLine('lineChart');drawLine('lineChart2');drawDonut();applyReportFilter(false)}'''
-assert old2 in html
-html = html.replace(old2, new2)
+<div class="section">
+ <div class="section-head">
+  <h3>گزارش تصویری این ماه</h3>
+  <span class="legend">
+   <span><i class="dot" style="background:var(--green)"></i>درآمد</span>
+   <span><i class="dot" style="background:var(--red)"></i>هزینه</span>
+  </span>
+ </div>
+ <div class="panel">
+  <div id="chart" class="chart"></div>
+ </div>
+</div>
 
-# Add report filtering functions before saveStyle
-needle = '''function saveName(){let n=$('userName').value.trim();'''
-insert = r'''function updateReportFilter(){let mode=$('reportMode').value;$('reportDateFields').style.display=mode==='all'?'none':'grid';$('reportDayWrap').style.display=mode==='day'?'block':'none'}
-function applyReportFilter(showAlert=true){
-if(!$('reportMode'))return;
-let mode=$('reportMode').value, y=$('reportYear').value.trim(), m=$('reportMonth').value, d=$('reportDay').value.trim();
-let filtered=entries;
-if(mode!=='all'){
- if(!/^\d{4}$/.test(y)){if(showAlert)alert('سال شمسی را وارد کن.');return}
- if(mode==='month')filtered=entries.filter(x=>jalaliDate(x.date).slice(0,7)===`${y}/${String(m).padStart(2,'0')}`);
- if(mode==='day'){
-  if(!/^\d{1,2}$/.test(d)||Number(d)<1||Number(d)>daysInMonth(Number(y),Number(m))){if(showAlert)alert('روز معتبر وارد کن.');return}
-  filtered=entries.filter(x=>jalaliDate(x.date)===`${y}/${String(m).padStart(2,'0')}/${String(Number(d)).padStart(2,'0')}`);
+<div class="section">
+ <div class="section-head"><h3>＋ ثبت تراکنش جدید</h3></div>
+ <div class="panel">
+  <form id="entryForm">
+   <div class="types">
+    <button type="button" class="type active income" id="incomeBtn" onclick="setType('income')">＋ درآمد</button>
+    <button type="button" class="type expense" id="expenseBtn" onclick="setType('expense')">－ هزینه</button>
+   </div>
+   <div>
+    <label>مبلغ (تومان)</label>
+    <input id="amount" type="text" inputmode="numeric" placeholder="مثلاً 2,500,000" required>
+   </div>
+   <div>
+    <label>بابت چی بوده؟</label>
+    <input id="description" type="text" placeholder="مثلاً خرید، حقوق، فروش..." required>
+   </div>
+   <div class="fields">
+    <div>
+     <label>دسته‌بندی</label>
+     <select id="category">
+      <option>عمومی</option>
+      <option>حقوق</option>
+      <option>فروش</option>
+      <option>خرید</option>
+      <option>خوراک</option>
+      <option>رفت‌وآمد</option>
+      <option>قبض</option>
+      <option>تفریح</option>
+      <option>درمان</option>
+      <option>سایر</option>
+     </select>
+    </div>
+    <div>
+     <label>تاریخ</label>
+     <input id="date" type="date" required>
+    </div>
+   </div>
+   <button class="submit" type="submit" id="submitBtn">ثبت تراکنش</button>
+  </form>
+ </div>
+</div>
+
+<div class="section">
+ <div class="section-head">
+  <h3>آخرین تراکنش‌ها</h3>
+  <select id="filter" style="width:125px;padding:9px" onchange="renderList()">
+   <option value="all">همه</option>
+   <option value="income">درآمدها</option>
+   <option value="expense">هزینه‌ها</option>
+  </select>
+ </div>
+ <div class="list" id="transactions"></div>
+</div>
+
+<footer>مدیریت مالی شخصی • اطلاعات ذخیره‌شده روی دستگاه شما</footer>
+</div>
+
+<dialog id="settings">
+ <h3>⚙ تنظیمات برنامه</h3>
+ <div style="margin-top:18px">
+  <label>نام دلخواه برنامه</label>
+  <input id="nameInput" placeholder="مثلاً دخل و خرج سعید">
+ </div>
+ <div style="margin-top:14px">
+  <label>رنگ اصلی برنامه</label>
+  <select id="themeInput">
+   <option value="green">سبز</option>
+   <option value="blue">آبی</option>
+   <option value="gold">طلایی</option>
+  </select>
+ </div>
+ <div class="modal-actions">
+  <button style="background:var(--green);color:#10241f" onclick="saveSettings()">ذخیره</button>
+  <button style="background:var(--panel2);color:white" onclick="document.getElementById('settings').close()">بستن</button>
+ </div>
+</dialog>
+
+<script>
+const $=id=>document.getElementById(id);
+const nf=new Intl.NumberFormat('en-US');
+const todayISO=()=>{
+ const d=new Date();
+ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+};
+const faDate=s=>{
+ if(!s)return '';
+ const [y,m,d]=s.split('-').map(Number);
+ return new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn',{
+  year:'numeric',month:'long',day:'numeric'
+ }).format(new Date(y,m-1,d));
+};
+let data=[];
+try{data=JSON.parse(localStorage.getItem('dakhl_data')||'[]')}
+catch(e){data=[]}
+let type='income';
+let editId=null;
+
+function save(){
+ localStorage.setItem('dakhl_data',JSON.stringify(data));
+}
+function money(n){return nf.format(Math.round(n||0))+' تومان'}
+function setType(t){
+ type=t;
+ $('incomeBtn').classList.toggle('active',t==='income');
+ $('expenseBtn').classList.toggle('active',t==='expense');
+ $('submitBtn').textContent=editId?'ذخیره تغییرات':'ثبت تراکنش';
+}
+function openSettings(){
+ $('nameInput').value=localStorage.getItem('dakhl_name')||'دخل و خرج من';
+ $('themeInput').value=localStorage.getItem('dakhl_theme')||'green';
+ $('settings').showModal();
+}
+function saveSettings(){
+ const name=$('nameInput').value.trim()||'دخل و خرج من';
+ localStorage.setItem('dakhl_name',name);
+ localStorage.setItem('dakhl_theme',$('themeInput').value);
+ applySettings();
+ $('settings').close();
+}
+function applySettings(){
+ $('brandName').textContent=localStorage.getItem('dakhl_name')||'دخل و خرج من';
+ const theme=localStorage.getItem('dakhl_theme')||'green';
+ const colors={green:'#27d6a0',blue:'#718cff',gold:'#f5c76b'};
+ document.documentElement.style.setProperty('--green',colors[theme]||colors.green);
+}
+function render(){
+ const now=todayISO();
+ const month=now.slice(0,7);
+ const current=data.filter(x=>x.date.startsWith(month));
+ const inc=current.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
+ const exp=current.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+ const ti=data.filter(x=>x.date===now&&x.type==='income').reduce((s,x)=>s+x.amount,0);
+ const te=data.filter(x=>x.date===now&&x.type==='expense').reduce((s,x)=>s+x.amount,0);
+ const allIn=data.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
+ const allOut=data.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+ $('balance').textContent=money(allIn-allOut);
+ $('incomeTotal').textContent=money(inc);
+ $('expenseTotal').textContent=money(exp);
+ $('todayIncome').textContent=money(ti);
+ $('todayExpense').textContent=money(te);
+ $('today').textContent='امروز: '+faDate(now);
+ renderChart(current);
+ renderList();
+}
+function renderChart(items){
+ const chart=$('chart');
+ chart.innerHTML='';
+ const days=new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate();
+ const last=days;
+ const groups=[];
+ for(let i=1;i<=last;i++){
+  const day=String(i).padStart(2,'0');
+  const prefix=todayISO().slice(0,7)+'-'+day;
+  const a=items.filter(x=>x.date===prefix);
+  groups.push({
+   day:i,
+   inc:a.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0),
+   exp:a.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0)
+  });
  }
+ const recent=groups.slice(Math.max(0,groups.length-7));
+ const max=Math.max(1,...recent.map(x=>Math.max(x.inc,x.exp)));
+ recent.forEach(g=>{
+  const col=document.createElement('div');
+  col.className='chart-col';
+  const area=document.createElement('div');
+  area.className='bar-area';
+  const a=document.createElement('div');
+  a.className='bar in';
+  a.style.height=Math.max(3,g.inc/max*100)+'%';
+  const b=document.createElement('div');
+  b.className='bar out';
+  b.style.height=Math.max(3,g.exp/max*100)+'%';
+  area.append(a,b);
+  const label=document.createElement('div');
+  label.className='chart-label';
+  label.textContent=g.day;
+  col.append(area,label);
+  chart.append(col);
+ });
 }
-let inc=filtered.filter(x=>x.type==='income').reduce((a,x)=>a+Number(x.amount),0),exp=filtered.filter(x=>x.type==='expense').reduce((a,x)=>a+Number(x.amount),0);
-$('reportIncome').textContent=fmt(inc);$('reportExpense').textContent=fmt(exp);$('reportBalance').textContent=fmt(inc-exp);$('reportCount').textContent=fmt(filtered.length)+' مورد';
-$('reportHeading').textContent=mode==='day'?'گزارش روزانه':mode==='month'?'گزارش ماهانه':'همه تراکنش‌ها';
-fillList('allList',[...filtered].sort((a,b)=>b.id-a.id));
+function renderList(){
+ const box=$('transactions');
+ box.innerHTML='';
+ const filter=$('filter').value;
+ const arr=[...data].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)
+ .filter(x=>filter==='all'||x.type===filter);
+ if(!arr.length){
+  box.innerHTML='<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
+  return;
+ }
+ arr.forEach(x=>{
+  const el=document.createElement('div');
+  el.className='item';
+  const right=document.createElement('div');
+  const title=document.createElement('div');
+  title.className='item-title';
+  title.textContent=x.description;
+  const date=document.createElement('div');
+  date.className='item-date';
+  date.textContent=faDate(x.date)+' • '+x.category;
+  right.append(title,date);
+  const left=document.createElement('div');
+  left.className='item-right';
+  const amount=document.createElement('div');
+  amount.className='item-amount '+(x.type==='income'?'green':'red');
+  amount.textContent=(x.type==='income'?'+ ':'− ')+money(x.amount);
+  const actions=document.createElement('div');
+  actions.className='actions';
+  actions.style.marginTop='7px';
+  const edit=document.createElement('button');
+  edit.className='action';
+  edit.textContent='ویرایش';
+  edit.onclick=()=>editItem(x.id);
+  const del=document.createElement('button');
+  del.className='delete';
+  del.textContent='×';
+  del.onclick=()=>deleteItem(x.id);
+  actions.append(edit,del);
+  left.append(amount,actions);
+  el.append(right,left);
+  box.append(el);
+ });
 }
-function saveName(){let n=$('userName').value.trim();'''
-assert needle in html
-html = html.replace(needle, insert)
-
-# Set filter default to current Jalali date, and initialize UI
-old3 = '''initDate();loadStyle();applyName();renderAll();window.addEventListener('resize',()=>{renderAll()});'''
-new3 = '''initDate();loadStyle();applyName();let rt=todayJ();$('reportYear').value=rt.y;$('reportMonth').value=rt.m;$('reportDay').value=rt.d;updateReportFilter();renderAll();window.addEventListener('resize',()=>{renderAll()});'''
-assert old3 in html
-html = html.replace(old3, new3)
-
-out = Path('/mnt/data/dakhl-kharj-complete.html')
-out.write_text(html, encoding='utf-8')
-print(f'نسخه کامل با گزارش روزانه و ماهانه آماده شد: {out} ({out.stat().st_size:,} بایت)')
+function editItem(id){
+ const x=data.find(a=>a.id===id);
+ if(!x)return;
+ editId=id;
+ setType(x.type);
+ $('amount').value=nf.format(x.amount);
+ $('description').value=x.description;
+ $('category').value=x.category;
+ $('date').value=x.date;
+ $('submitBtn').textContent='ذخیره تغییرات';
+ $('entryForm').scrollIntoView({behavior:'smooth'});
+}
+function deleteItem(id){
+ if(!confirm('این تراکنش حذف شود؟'))return;
+ data=data.filter(x=>x.id!==id);
+ save();render();
+}
+$('amount').addEventListener('input',e=>{
+ let v=e.target.value.replace(/[^\d]/g,'');
+ e.target.value=v?nf.format(Number(v)):'';
+});
+$('entryForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const amount=Number($('amount').value.replace(/,/g,''));
+ const description=$('description').value.trim();
+ const date=$('date').value;
+ if(!amount||amount<=0||!description||!date){
+  alert('لطفاً مبلغ، شرح و تاریخ را درست وارد کن.');
+  return;
+ }
+ const item={
+  id:editId||Date.now(),
+  type,amount,description,date,
+  category:$('category').value
+ };
+ if(editId){
+  data=data.map(x=>x.id===editId?item:x);
+ }else{
+  data.push(item);
+ }
+ save();
+ $('entryForm').reset();
+ $('date').value=todayISO();
+ editId=null;
+ setType('income');
+ render();
+});
+$('date').value=todayISO();
+applySettings();
+render();
+</script>
+</body>
+</html>
