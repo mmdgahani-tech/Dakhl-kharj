@@ -1,516 +1,112 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101522">
-<title>دخل و خرج من</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f6fc">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>دخل‌وخرج من</title>
 <style>
-:root{
---bg:#101522;--panel:#192233;--panel2:#202c40;
---text:#f3f5fa;--muted:#91a0b6;--green:#27d6a0;
---red:#ff647c;--blue:#718cff;--gold:#f5c76b;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial;padding:16px}
-.app{max-width:850px;margin:auto}
-header{display:flex;justify-content:space-between;align-items:center;margin:12px 0 24px}
-.brand{font-size:23px;font-weight:bold}
-.brand span{color:var(--green)}
-.sub{font-size:12px;color:var(--muted);margin-top:7px}
-button{cursor:pointer;border:0;font-family:inherit}
-.settings{background:var(--panel2);color:white;padding:11px 14px;border-radius:12px;font-size:19px}
-.welcome{background:linear-gradient(120deg,#263c58,#192a43);padding:22px;border-radius:20px;margin-bottom:17px;border:1px solid #344965}
-.welcome small{color:#b6c7df}
-.welcome h2{margin:10px 0;font-size:25px}
-.date{font-size:12px;color:#b6c7df}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:var(--panel);border:1px solid #29364a;padding:17px;border-radius:17px}
-.card small{color:var(--muted);font-size:12px}
-.amount{font-size:17px;font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
-.green{color:var(--green)}.red{color:var(--red)}
-.section{margin-top:25px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;gap:8px}
-h3{font-size:16px;margin:0}
-.panel{background:var(--panel);border:1px solid #29364a;border-radius:17px;padding:17px}
-.chart{display:flex;gap:10px;align-items:end;height:145px;margin-top:15px}
-.chart-col{flex:1;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:end;gap:8px}
-.bar-area{height:110px;display:flex;align-items:end;justify-content:center;gap:4px}
-.bar{width:35%;max-width:38px;border-radius:7px 7px 3px 3px;min-height:2px}
-.bar.in{background:var(--green)}.bar.out{background:var(--red)}
-.chart-label{font-size:11px;color:var(--muted)}
-.legend{display:flex;gap:12px;font-size:11px;color:var(--muted)}
+:root{--bg:#f7f6fc;--card:#fff;--ink:#24213a;--muted:#8b879d;--purple:#5743df;--pink:#f36b91;--line:#eeeaf7;--green:#25a879;--red:#e65c78}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;padding:0 0 88px}
+.app{max-width:560px;margin:auto;padding:18px 16px 22px}
+header{display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px}
+h1{font-size:22px;margin:0 0 5px} .sub{font-size:12px;color:var(--muted)}
+.avatar{width:42px;height:42px;border-radius:15px;background:#ece9ff;color:var(--purple);display:grid;place-items:center;font-size:20px}
+.card{background:var(--card);border-radius:20px;padding:17px;margin:12px 0;box-shadow:0 5px 22px #30235d0a}
+.hero{background:linear-gradient(120deg,#f46e94,#e95381);color:#fff;padding:19px;border-radius:21px;box-shadow:0 8px 22px #e9538130}
+.hero .sub{color:#fff;opacity:.9}.hero strong{font-size:25px;display:block;margin:12px 0 5px;direction:ltr;text-align:right}
+.herofoot{display:flex;justify-content:space-between;font-size:11px;opacity:.95;margin-top:12px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.quick .card{margin:0;min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.quick b{font-size:14px}.quick small{display:block;color:var(--muted);font-size:11px;margin-top:7px}
+.qicon{width:38px;height:38px;border-radius:13px;background:#f0edff;color:var(--purple);display:grid;place-items:center;font-size:19px}
+h2{font-size:16px;margin:0 0 14px}.sectionhead{display:flex;align-items:center;justify-content:space-between}
+.link{border:0;background:none;color:var(--purple);font-size:12px;padding:4px;width:auto;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stat{background:#fff;border-radius:16px;padding:12px 8px;box-shadow:0 4px 18px #30235d08}
+.stat small{display:block;color:var(--muted);font-size:10px;margin-bottom:8px}.stat b{font-size:12px;direction:ltr;display:block;text-align:right;overflow-wrap:anywhere}
+.income{color:var(--green)}.expense{color:var(--red)}.balance{color:var(--purple)}
+canvas{width:100%;height:190px;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:8px 0 0}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px}
-form{display:grid;gap:12px}
-.types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.type{padding:13px;border-radius:12px;background:var(--panel2);color:var(--muted);font-size:14px;border:1px solid transparent}
-.type.active.income{border-color:var(--green);color:var(--green)}
-.type.active.expense{border-color:var(--red);color:var(--red)}
-input,select{width:100%;padding:13px;background:var(--panel2);color:white;border:1px solid #35435b;border-radius:11px;font-family:inherit;font-size:14px;outline:none}
-label{font-size:12px;color:var(--muted);display:block;margin-bottom:7px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.submit{background:var(--green);color:#10241f;padding:15px;border-radius:12px;font-size:15px;font-weight:bold}
-.list{display:grid;gap:9px}
-.item{background:var(--panel2);padding:14px;border-radius:13px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.item-title{font-size:13px;font-weight:bold}
-.item-date{font-size:10px;color:var(--muted);margin-top:7px}
-.item-right{text-align:left;white-space:nowrap}
-.item-amount{font-size:13px;font-weight:bold}
-.delete{background:transparent;color:var(--red);font-size:18px;margin-right:8px}
-.actions{display:flex;gap:7px}
-.action{padding:7px 10px;border-radius:8px;background:#35435b;color:white;font-size:11px}
-.empty{text-align:center;color:var(--muted);padding:25px;font-size:13px}
-.date-picker{position:relative}
-.date-display{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:right;background:var(--panel2);border:1px solid #35435b;color:white;padding:14px;border-radius:11px;font-size:14px}
-.calendar{display:none;position:absolute;z-index:20;top:calc(100% + 8px);right:0;width:100%;min-width:290px;background:#202c40;border:1px solid #465773;border-radius:16px;padding:13px;box-shadow:0 15px 35px #0009}
-.calendar.show{display:block}
-.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;gap:5px}
-.cal-head button{background:#35435b;color:white;padding:9px 13px;border-radius:8px}
-.cal-head strong{font-size:13px}
-.cal-selects{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
-.cal-selects select{padding:9px;font-size:12px}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
-.cal-week{font-size:10px;color:var(--muted);padding:8px 0}
-.cal-day{height:36px;border-radius:9px;background:transparent;color:white;font-size:12px}
-.cal-day:hover{background:#40516b}
-.cal-day.selected{background:var(--green);color:#10241f;font-weight:bold}
-.cal-day.today{border:1px solid var(--green)}
-.cal-day:disabled{opacity:.2;cursor:default}
-.cal-footer{display:flex;justify-content:space-between;margin-top:12px;gap:8px}
-.cal-footer button{background:#35435b;color:white;padding:10px;border-radius:9px;font-size:11px}
-.cal-footer .today-btn{background:var(--green);color:#10241f}
-footer{text-align:center;color:var(--muted);font-size:10px;padding:25px}
-dialog{background:var(--panel);color:white;border:1px solid #40516a;border-radius:18px;width:90%;max-width:400px;padding:22px}
-dialog::backdrop{background:#000a}
-.modal-actions{display:flex;gap:8px;margin-top:15px}
-.modal-actions button{flex:1;padding:12px;border-radius:10px}
-@media(max-width:420px){
-body{padding:12px}.amount{font-size:15px}.brand{font-size:20px}
-.card{padding:13px}.calendar{min-width:275px}
-}
+.donutrow{display:flex;align-items:center;gap:16px}.donutrow canvas{width:145px;height:145px;flex:0 0 145px}
+.catlist{flex:1;font-size:11px;color:var(--muted)}.catitem{display:flex;justify-content:space-between;gap:5px;margin:9px 0}
+.entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border:0}.entrytitle{font-size:13px;font-weight:bold}.entrymeta{font-size:10px;color:var(--muted);margin-top:6px}
+.entryamount{direction:ltr;text-align:left;white-space:nowrap;font-size:12px;font-weight:bold}
+.entryicon{width:37px;height:37px;border-radius:13px;background:#f2efff;color:var(--purple);display:grid;place-items:center;flex:0 0 37px}
+.entryleft{display:flex;align-items:center;gap:10px;min-width:0}.entrytext{min-width:0}
+button,input,select{font:inherit}button,.primary{border:0;border-radius:13px;background:var(--purple);color:#fff;padding:13px 16px;font-weight:bold;cursor:pointer;width:100%}
+.secondary{background:#f0edff;color:var(--purple)}
+label{display:block;font-size:12px;margin:12px 0 6px;color:#55516c}
+input,select{width:100%;border:1px solid #e9e5f2;background:#fff;border-radius:12px;padding:12px;color:var(--ink);outline:none}
+input:focus,select:focus{border-color:#9b8ef0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom))}
+.tabwrap{width:100%;max-width:560px;display:flex;justify-content:space-around;align-items:center}
+.tab{width:52px;background:none;color:#9691a7;padding:5px 0;margin:0;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tab .ico{font-size:21px;line-height:24px}.tab.active{color:var(--purple)}
+.tab.add{background:var(--purple);color:#fff;border-radius:17px;width:48px;height:48px;font-size:22px;box-shadow:0 5px 14px #5743df55}
+.page{display:none}.page.active{display:block}
+.empty{text-align:center;color:var(--muted);padding:24px 8px;font-size:12px}
+.pill{display:inline-block;background:#f0edff;color:var(--purple);border-radius:20px;padding:6px 10px;font-size:10px}
+.actions{display:flex;gap:8px}.actions button{flex:1}
+.smallmuted{font-size:11px;color:var(--muted);line-height:1.8}
+@media(max-width:370px){.app{padding:14px 11px}.stat b{font-size:10px}.donutrow{gap:8px}.donutrow canvas{width:120px;height:120px;flex-basis:120px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header>
-<div>
-<div class="brand">◈ <span id="brandName">دخل و خرج من</span></div>
-<div class="sub">مدیریت هوشمند دخل و خرج روزانه</div>
+<section id="home" class="page active">
+<header><div><h1 id="welcomeTitle">سلام! 👋</h1><div class="sub" id="todayLabel">مدیریت دخل‌وخرج روزانه</div></div><div class="avatar">⌂</div></header>
+<div class="hero"><div class="sub">موجودی کل حساب</div><strong id="heroBalance">0</strong><div class="herofoot"><span>وضعیت مالی شما</span><span id="monthLabel"></span></div></div>
+<div class="quick">
+<div class="card" onclick="showPage('add')"><div><b>افزودن درآمد</b><small>ثبت پول دریافتی</small></div><div class="qicon">＋</div></div>
+<div class="card" onclick="showPage('add','expense')"><div><b>افزودن هزینه</b><small>ثبت پرداختی‌ها</small></div><div class="qicon">−</div></div>
 </div>
-<button class="settings" onclick="openSettings()">⚙</button>
-</header>
+<div class="stats">
+<div class="stat"><small>کل درآمد</small><b class="income" id="incomeTotal">0</b></div>
+<div class="stat"><small>کل هزینه</small><b class="expense" id="expenseTotal">0</b></div>
+<div class="stat"><small>مانده</small><b class="balance" id="balanceTotal">0</b></div>
+</div>
+<div class="card"><div class="sectionhead"><h2>درآمدها و هزینه‌ها</h2><span class="pill">۶ ماه اخیر</span></div><canvas id="lineChart"></canvas><div class="legend"><span><i class="dot" style="background:#5743df"></i>درآمد</span><span><i class="dot" style="background:#f36b91"></i>هزینه</span></div></div>
+<div class="card"><div class="sectionhead"><h2>آخرین تراکنش‌ها</h2><button class="link" onclick="showPage('reports')">مشاهده همه</button></div><div id="recentList"></div></div>
+</section>
 
-<div class="welcome">
-<small>موجودی کل حساب</small>
-<h2 id="balance">0 تومان</h2>
-<div class="date" id="today"></div>
-</div>
+<section id="charts" class="page">
+<header><div><h1>نمودارها</h1><div class="sub">نمای کلی وضعیت مالی</div></div><div class="avatar">◔</div></header>
+<div class="card"><h2>روند درآمد و هزینه</h2><canvas id="lineChart2"></canvas><div class="legend"><span><i class="dot" style="background:#5743df"></i>درآمد</span><span><i class="dot" style="background:#f36b91"></i>هزینه</span></div></div>
+<div class="card"><h2>هزینه‌ها بر اساس دسته‌بندی</h2><div class="donutrow"><canvas id="donutChart"></canvas><div id="categoryLegend" class="catlist"></div></div></div>
+<div class="stats"><div class="stat"><small>میانگین هزینه</small><b id="avgExpense">0</b></div><div class="stat"><small>تعداد تراکنش</small><b id="countTotal">0</b></div><div class="stat"><small>مانده</small><b id="balanceTotal2">0</b></div></div>
+</section>
 
-<div class="cards">
-<div class="card"><small>↗ مجموع درآمد این ماه</small><div class="amount green" id="incomeTotal">0</div></div>
-<div class="card"><small>↘ مجموع هزینه این ماه</small><div class="amount red" id="expenseTotal">0</div></div>
-<div class="card"><small>درآمد امروز</small><div class="amount green" id="todayIncome">0</div></div>
-<div class="card"><small>هزینه امروز</small><div class="amount red" id="todayExpense">0</div></div>
-</div>
+<section id="add" class="page">
+<header><div><h1>ثبت تراکنش</h1><div class="sub">درآمد یا هزینه جدیدت رو وارد کن</div></div><div class="avatar">＋</div></header>
+<div class="card">
+<form id="form">
+<label>نوع تراکنش</label><div class="grid2"><button type="button" id="incomeBtn" class="secondary" onclick="setType('income')">＋ درآمد</button><button type="button" id="expenseBtn" onclick="setType('expense')">− هزینه</button></div>
+<input type="hidden" id="type" value="expense">
+<label>مبلغ (تومان)</label><input id="amount" inputmode="numeric" placeholder="مثلاً 1,250,000" required>
+<label>بابت چی بوده؟</label><input id="reason" maxlength="100" placeholder="مثلاً خرید روزانه" required>
+<div class="grid2"><div><label>سال شمسی</label><input id="jy" inputmode="numeric" maxlength="4" required></div><div><label>ماه</label><select id="jm"><option value="1">فروردین</option><option value="2">اردیبهشت</option><option value="3">خرداد</option><option value="4">تیر</option><option value="5">مرداد</option><option value="6">شهریور</option><option value="7">مهر</option><option value="8">آبان</option><option value="9">آذر</option><option value="10">دی</option><option value="11">بهمن</option><option value="12">اسفند</option></select></div></div>
+<label>روز</label><input id="jd" inputmode="numeric" maxlength="2" required>
+<label>دسته‌بندی</label><select id="category"><option>عمومی</option><option>خوراک</option><option>رفت‌وآمد</option><option>خرید</option><option>حقوق</option><option>فروش</option><option>قبض و خدمات</option><option>درمان</option><option>تفریح</option><option>سایر</option></select>
+<button type="submit" style="margin-top:18px">ذخیره تراکنش</button>
+</form></div>
+<div class="smallmuted">تاریخ به‌صورت شمسی ذخیره می‌شود. اطلاعات روی همین دستگاه نگهداری می‌شود.</div>
+</section>
 
-<div class="section">
-<div class="section-head">
-<h3>گزارش تصویری این ماه</h3>
-<div class="legend">
-<span><i class="dot" style="background:var(--green)"></i>درآمد</span>
-<span><i class="dot" style="background:var(--red)"></i>هزینه</span>
-</div>
-</div>
-<div class="panel"><div id="chart" class="chart"></div></div>
-</div>
+<section id="reports" class="page">
+<header><div><h1>گزارش‌ها</h1><div class="sub">گزارش تراکنش‌های ثبت‌شده</div></div><div class="avatar">▤</div></header>
+<div class="stats"><div class="stat"><small>درآمد</small><b class="income" id="reportIncome">0</b></div><div class="stat"><small>هزینه</small><b class="expense" id="reportExpense">0</b></div><div class="stat"><small>مانده</small><b class="balance" id="reportBalance">0</b></div></div>
+<div class="card"><div class="sectionhead"><h2>همه تراکنش‌ها</h2><span class="pill" id="reportCount">۰ مورد</span></div><div id="allList"></div></div>
+</section>
 
-<div class="section">
-<div class="section-head"><h3>＋ ثبت تراکنش جدید</h3></div>
-<div class="panel">
-<form id="entryForm">
-<div class="types">
-<button type="button" class="type active income" id="incomeBtn" onclick="setType('income')">＋ درآمد</button>
-<button type="button" class="type expense" id="expenseBtn" onclick="setType('expense')">－ هزینه</button>
-</div>
-<div>
-<label>مبلغ (تومان)</label>
-<input id="amount" inputmode="numeric" placeholder="2,500,000" required>
-</div>
-<div>
-<label>بابت چی بوده؟</label>
-<input id="description" placeholder="مثلاً خرید، حقوق، فروش..." required>
-</div>
-<div class="fields">
-<div>
-<label>دسته‌بندی</label>
-<select id="category">
-<option>عمومی</option><option>حقوق</option><option>فروش</option>
-<option>خرید</option><option>خوراک</option><option>رفت‌وآمد</option>
-<option>قبض</option><option>تفریح</option><option>درمان</option><option>سایر</option>
-</select>
-</div>
-<div class="date-picker">
-<label>انتخاب تاریخ شمسی</label>
-<button type="button" class="date-display" id="dateDisplay">
-<span id="dateText">انتخاب تاریخ</span><span>▣</span>
-</button>
-<input type="hidden" id="date">
-<div class="calendar" id="calendar">
-<div class="cal-head">
-<button type="button" id="prevMonth">‹</button>
-<strong id="calTitle"></strong>
-<button type="button" id="nextMonth">›</button>
-</div>
-<div class="cal-selects">
-<select id="calMonth"></select>
-<select id="calYear"></select>
-</div>
-<div class="cal-grid" id="calGrid"></div>
-<div class="cal-footer">
-<button type="button" id="closeCalendar">بستن</button>
-<button type="button" class="today-btn" id="chooseToday">امروز</button>
-</div>
-</div>
-</div>
-</div>
-<button class="submit" id="submitBtn" type="submit">ثبت تراکنش</button>
-</form>
-</div>
-</div>
-
-<div class="section">
-<div class="section-head">
-<h3>آخرین تراکنش‌ها</h3>
-<select id="filter" style="width:125px;padding:9px" onchange="renderList()">
-<option value="all">همه</option>
-<option value="income">درآمدها</option>
-<option value="expense">هزینه‌ها</option>
-</select>
-</div>
-<div class="list" id="transactions"></div>
-</div>
-<footer>مدیریت مالی شخصی • اطلاعات ذخیره‌شده روی دستگاه شما</footer>
-</div>
-
-<dialog id="settings">
-<h3>⚙ تنظیمات برنامه</h3>
-<div style="margin-top:18px">
-<label>نام دلخواه برنامه</label>
-<input id="nameInput" placeholder="مثلاً دخل و خرج سعید">
-</div>
-<div style="margin-top:14px">
-<label>رنگ اصلی برنامه</label>
-<select id="themeInput">
-<option value="green">سبز</option><option value="blue">آبی</option><option value="gold">طلایی</option>
-</select>
-</div>
-<div class="modal-actions">
-<button style="background:var(--green);color:#10241f" onclick="saveSettings()">ذخیره</button>
-<button style="background:var(--panel2);color:white" onclick="$('settings').close()">بستن</button>
-</div>
-</dialog>
-
-<script>
-const $=id=>document.getElementById(id);
-const nf=new Intl.NumberFormat('en-US');
-const months=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-const weekdays=['ش','ی','د','س','چ','پ','ج'];
-
-function div(a,b){return Math.floor(a/b)}
-function mod(a,b){return a-Math.floor(a/b)*b}
-
-// تبدیل میلادی به شمسی با تقویم رسمی مرورگر
-function toJalali(iso){
-const [y,m,d]=iso.split('-').map(Number);
-const date=new Date(Date.UTC(y,m-1,d,12));
-const parts=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{
-year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'
-}).formatToParts(date);
-const get=k=>Number(parts.find(p=>p.type===k).value);
-return {jy:get('year'),jm:get('month'),jd:get('day')};
-}
-
-// تبدیل شمسی به میلادی با جستجوی تاریخ متناظر
-function toGregorian(jy,jm,jd){
-const target=`${jy}-${jm}-${jd}`;
-const start=Date.UTC(jy+620,0,1,12);
-const end=Date.UTC(jy+623,0,1,12);
-for(let t=start;t<end;t+=86400000){
-const date=new Date(t);
-const parts=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{
-year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'
-}).formatToParts(date);
-const get=k=>Number(parts.find(p=>p.type===k).value);
-if(`${get('year')}-${get('month')}-${get('day')}`===target){
-return `${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,'0')}-${String(date.getUTCDate()).padStart(2,'0')}`;
-}
-}
-return null;
-}
-
-function jalaliString(iso){
-if(!iso)return '';
-const j=toJalali(iso);
-return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`;
-}
-function todayISO(){
-const d=new Date();
-return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function money(n){return nf.format(Math.round(n||0))+' تومان'}
-
-// تقویم انتخاب تاریخ
-let selectedISO=todayISO();
-let viewYear=toJalali(todayISO()).jy;
-let viewMonth=toJalali(todayISO()).jm;
-
-function initCalendar(){
-$('calMonth').innerHTML=months.map((m,i)=>`<option value="${i+1}">${m}</option>`).join('');
-$('calYear').innerHTML=Array.from({length:151},(_,i)=>1400+i)
-.map(y=>`<option value="${y}">${y}</option>`).join('');
-$('calMonth').value=viewMonth;
-$('calYear').value=viewYear;
-renderCalendar();
-}
-function monthLength(y,m){
-let count=0;
-for(let d=1;d<=31;d++){
-if(toGregorian(y,m,d))count++;
-else break;
-}
-return count;
-}
-function renderCalendar(){
-$('calMonth').value=viewMonth;
-$('calYear').value=viewYear;
-$('calTitle').textContent=months[viewMonth-1]+' '+viewYear;
-const grid=$('calGrid');
-grid.innerHTML='';
-weekdays.forEach(w=>{
-const el=document.createElement('div');
-el.className='cal-week';el.textContent=w;grid.append(el);
-});
-const firstISO=toGregorian(viewYear,viewMonth,1);
-const first=new Date(firstISO+'T12:00:00');
-const offset=(first.getDay()+1)%7;
-for(let i=0;i<offset;i++){
-const blank=document.createElement('div');grid.append(blank);
-}
-const len=monthLength(viewYear,viewMonth);
-for(let d=1;d<=len;d++){
-const iso=toGregorian(viewYear,viewMonth,d);
-const b=document.createElement('button');
-b.type='button';b.className='cal-day';b.textContent=d;
-if(iso===selectedISO)b.classList.add('selected');
-if(iso===todayISO())b.classList.add('today');
-b.onclick=()=>{
-selectedISO=iso;
-updateDateDisplay();
-closeCalendar();
-};
-grid.append(b);
-}
-}
-function updateDateDisplay(){
-$('date').value=selectedISO;
-$('dateText').textContent=jalaliString(selectedISO);
-}
-function openCalendar(){
-const j=toJalali(selectedISO);
-viewYear=j.jy;viewMonth=j.jm;
-renderCalendar();
-$('calendar').classList.add('show');
-}
-function closeCalendar(){$('calendar').classList.remove('show')}
-function changeMonth(n){
-viewMonth+=n;
-if(viewMonth>12){viewMonth=1;viewYear++}
-if(viewMonth<1){viewMonth=12;viewYear--}
-renderCalendar();
-}
-$('dateDisplay').onclick=openCalendar;
-$('prevMonth').onclick=()=>changeMonth(-1);
-$('nextMonth').onclick=()=>changeMonth(1);
-$('calMonth').onchange=e=>{viewMonth=Number(e.target.value);renderCalendar()};
-$('calYear').onchange=e=>{viewYear=Number(e.target.value);renderCalendar()};
-$('closeCalendar').onclick=closeCalendar;
-$('chooseToday').onclick=()=>{
-selectedISO=todayISO();
-updateDateDisplay();
-closeCalendar();
-};
-document.addEventListener('click',e=>{
-if(!$('dateDisplay').contains(e.target)&&!$('calendar').contains(e.target))closeCalendar();
-});
-
-let data=[];
-try{data=JSON.parse(localStorage.getItem('dakhl_data')||'[]')}
-catch(e){data=[]}
-let type='income',editId=null;
-
-function save(){localStorage.setItem('dakhl_data',JSON.stringify(data))}
-function setType(t){
-type=t;
-$('incomeBtn').classList.toggle('active',t==='income');
-$('expenseBtn').classList.toggle('active',t==='expense');
-}
-function openSettings(){
-$('nameInput').value=localStorage.getItem('dakhl_name')||'دخل و خرج من';
-$('themeInput').value=localStorage.getItem('dakhl_theme')||'green';
-$('settings').showModal();
-}
-function saveSettings(){
-localStorage.setItem('dakhl_name',$('nameInput').value.trim()||'دخل و خرج من');
-localStorage.setItem('dakhl_theme',$('themeInput').value);
-applySettings();
-$('settings').close();
-}
-function applySettings(){
-$('brandName').textContent=localStorage.getItem('dakhl_name')||'دخل و خرج من';
-const colors={green:'#27d6a0',blue:'#718cff',gold:'#f5c76b'};
-document.documentElement.style.setProperty('--green',colors[localStorage.getItem('dakhl_theme')]||colors.green);
-}
-
-function render(){
-const now=todayISO();
-const todayJ=toJalali(now);
-const current=data.filter(x=>{
-const j=toJalali(x.date);
-return j.jy===todayJ.jy&&j.jm===todayJ.jm;
-});
-const inc=current.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
-const exp=current.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
-const ti=data.filter(x=>x.date===now&&x.type==='income').reduce((s,x)=>s+x.amount,0);
-const te=data.filter(x=>x.date===now&&x.type==='expense').reduce((s,x)=>s+x.amount,0);
-const allIn=data.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
-const allOut=data.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
-$('balance').textContent=money(allIn-allOut);
-$('incomeTotal').textContent=money(inc);
-$('expenseTotal').textContent=money(exp);
-$('todayIncome').textContent=money(ti);
-$('todayExpense').textContent=money(te);
-$('today').textContent='امروز: '+jalaliString(now);
-renderChart(current,todayJ);
-renderList();
-}
-
-function renderChart(items,todayJ){
-const chart=$('chart');chart.innerHTML='';
-const len=monthLength(todayJ.jy,todayJ.jm);
-const groups=[];
-for(let i=1;i<=len;i++){
-const iso=toGregorian(todayJ.jy,todayJ.jm,i);
-const a=items.filter(x=>x.date===iso);
-groups.push({
-day:i,
-inc:a.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0),
-exp:a.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0)
-});
-}
-const recent=groups.slice(Math.max(0,groups.length-7));
-const max=Math.max(1,...recent.map(x=>Math.max(x.inc,x.exp)));
-recent.forEach(g=>{
-const col=document.createElement('div');col.className='chart-col';
-const area=document.createElement('div');area.className='bar-area';
-const a=document.createElement('div');a.className='bar in';
-a.style.height=Math.max(3,g.inc/max*100)+'%';
-const b=document.createElement('div');b.className='bar out';
-b.style.height=Math.max(3,g.exp/max*100)+'%';
-area.append(a,b);
-const label=document.createElement('div');label.className='chart-label';label.textContent=g.day;
-col.append(area,label);chart.append(col);
-});
-}
-
-function renderList(){
-const box=$('transactions');box.innerHTML='';
-const filter=$('filter').value;
-const arr=[...data].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)
-.filter(x=>filter==='all'||x.type===filter);
-if(!arr.length){
-box.innerHTML='<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
-return;
-}
-arr.forEach(x=>{
-const el=document.createElement('div');el.className='item';
-const right=document.createElement('div');
-const title=document.createElement('div');title.className='item-title';title.textContent=x.description;
-const date=document.createElement('div');date.className='item-date';
-date.textContent=jalaliString(x.date)+' • '+x.category;
-right.append(title,date);
-const left=document.createElement('div');left.className='item-right';
-const amount=document.createElement('div');
-amount.className='item-amount '+(x.type==='income'?'green':'red');
-amount.textContent=(x.type==='income'?'+ ':'− ')+money(x.amount);
-const actions=document.createElement('div');actions.className='actions';actions.style.marginTop='7px';
-const edit=document.createElement('button');edit.className='action';edit.textContent='ویرایش';edit.onclick=()=>editItem(x.id);
-const del=document.createElement('button');del.className='delete';del.textContent='×';del.onclick=()=>deleteItem(x.id);
-actions.append(edit,del);left.append(amount,actions);el.append(right,left);box.append(el);
-});
-}
-function editItem(id){
-const x=data.find(a=>a.id===id);if(!x)return;
-editId=id;setType(x.type);
-$('amount').value=nf.format(x.amount);
-$('description').value=x.description;
-$('category').value=x.category;
-selectedISO=x.date;updateDateDisplay();
-$('submitBtn').textContent='ذخیره تغییرات';
-$('entryForm').scrollIntoView({behavior:'smooth'});
-}
-function deleteItem(id){
-if(!confirm('این تراکنش حذف شود؟'))return;
-data=data.filter(x=>x.id!==id);save();render();
-}
-$('amount').addEventListener('input',e=>{
-const v=e.target.value.replace(/[^\d]/g,'');
-e.target.value=v?nf.format(Number(v)):'';
-});
-$('entryForm').addEventListener('submit',e=>{
-e.preventDefault();
-const amount=Number($('amount').value.replace(/,/g,''));
-const description=$('description').value.trim();
-if(!amount||amount<=0||!description||!selectedISO){
-alert('مبلغ، شرح و تاریخ را کامل کن.');
-return;
-}
-const item={
-id:editId||Date.now(),type,amount,description,
-date:selectedISO,category:$('category').value
-};
-if(editId)data=data.map(x=>x.id===editId?item:x);
-else data.push(item);
-save();
-$('entryForm').reset();
-selectedISO=todayISO();
-updateDateDisplay();
-editId=null;
-setType('income');
-$('submitBtn').textContent='ثبت تراکنش';
-render();
-});
-
-// شروع برنامه با تاریخ واقعی امروز
-selectedISO=todayISO();
-updateDateDisplay();
-initCalendar();
-applySettings();
-render();
-
-// به‌روزرسانی خودکار تاریخ در صورت باز ماندن برنامه
-setInterval(()=>{
-const actual=todayISO();
-if(selectedISO===lastAutoDate){
-selectedISO=actual;
-updateDateDisplay();
-}
-if(actual!==lastAutoDate){
-lastAutoDate=actual;
-render();
-}
-},30000);
-let lastAutoDate=todayISO();
-</script>
-</body>
-</html>
+<section id="settings" class="page">
+<header><div><h1>تنظیمات</h1><div class="sub">شخصی‌سازی برنامه</div></div><div class="avatar">⚙</div></header>
+<div class="card"><h2>شخصی‌سازی خوشامدگویی</h2><label>اسم دلخواهت</label><input id="userName" maxlength="30" placeholder="مثلاً سعید"><button onclick="saveName()">ذخیره اسم</button><p class="smallmuted">این اسم در بالای صفحه خانه نمایش داده می‌شود.</p></div>
+<div class="card"><h2>ظاهر برنامه</h2><label>رنگ زمینه</label><input id="bgColor" type="color" value="#f7f6fc"><label>رنگ اصلی</label><input id="mainColor" type="color" value="#5743df"><label>فونت</label><select id="fontChoice"><option value="Tahoma,Arial,sans-serif">Tahoma</option><option value="Arial,sans-serif">Arial</option><option value="system-ui,sans-serif">System</option><option value="Georgia,serif">Georgia</option></select><button onclick="saveStyle()">ذخیره تنظیمات</button></div>
+<div class="card"><h2>پشتیبان‌گیری</h2><p class="smallmuted">برای نگهداری امن اطلاعات، می‌تونی از تراکنش‌هات فایل پشتیبان بگیری.</p><div class="actions"><button onclick="backup()">خروجی گرفتن</button><button class="secondary" onclick="document.getElementById('restoreFile').click()">بازیابی فایل</button></div><input id="restoreFile" type="file" accept="application/json" hidden onchange="restore(event)"></div>
+<div class="card"><h2>اطلاعات برنامه</h2><div class="smallmuted">نسخه شخصی دخل‌وخرج · ذخیره‌سازی محلی روی دستگاه</div></div>
+</section>
