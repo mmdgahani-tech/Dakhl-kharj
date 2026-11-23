@@ -4,199 +4,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7f6fc">
-<title>دخل‌وخرج من</title>
+<meta name="theme-color" content="#f5f4fa">
+<title>دخل و خرج من</title>
 <style>
 :root{
-  --bg:#f7f6fc;
-  --card:#ffffff;
-  --ink:#25233a;
-  --muted:#89869b;
-  --primary:#6554d9;
-  --green:#159b69;
-  --green-bg:#e5f8ef;
-  --red:#e34f6b;
-  --red-bg:#fff0f2;
-  --line:#eeecf4;
-  --shadow:0 5px 20px rgba(40,30,90,.06);
+  --bg:#f5f4fa;--card:#fff;--ink:#292638;--muted:#89869a;
+  --purple:#6554d9;--green:#159b69;--red:#e34f6b;
+  --line:#eeecf3;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:Tahoma,Arial,sans-serif;
-  font-size:14px;
-  padding-bottom:90px;
-}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;font-size:14px;padding-bottom:90px}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:600px;margin:auto;padding:18px 15px}
-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin:8px 0 22px;
-}
-.brand{font-size:21px;font-weight:900}
-.brand small{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:5px}
-.avatar{
-  width:43px;height:43px;border-radius:15px;
-  display:grid;place-items:center;background:#eae6ff;color:var(--primary);
-  font-size:20px;font-weight:bold;
-}
+.app{max-width:600px;margin:auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;margin:8px 0 20px}
+.brand{font-size:21px;font-weight:bold}
+.sub{font-size:11px;color:var(--muted);margin-top:6px}
+.avatar{background:#eae6ff;color:var(--purple);width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:21px}
 .page{display:none}
 .page.active{display:block}
-h2{font-size:18px;margin:5px 0 15px}
-h3{font-size:14px;margin:0 0 12px}
-.card{
-  background:var(--card);border-radius:19px;padding:17px;
-  box-shadow:var(--shadow);margin-bottom:14px;
-}
-.balance{
-  background:linear-gradient(135deg,#5746c8,#8978ef);
-  color:white;padding:22px;border-radius:22px;margin-bottom:15px;
-  box-shadow:0 8px 22px #6554d933;
-}
-.balance .caption{font-size:12px;opacity:.85}
-.balance .number{font-size:29px;font-weight:900;margin:12px 0}
-.balance .unit{font-size:12px;opacity:.85}
+h2{font-size:18px;margin:8px 0 15px}
+h3{font-size:14px;margin:0 0 13px}
+.card{background:var(--card);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 5px 20px #30265b0b}
+.balance{background:linear-gradient(130deg,#5745c7,#8978ef);color:white;padding:23px;border-radius:22px;margin-bottom:14px}
+.balance-label{opacity:.85;font-size:12px}
+.balance-number{font-size:29px;font-weight:bold;margin:12px 0}
+.balance-unit{font-size:12px;opacity:.8}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{padding:15px;border-radius:17px;background:var(--card);box-shadow:var(--shadow)}
-.stat-label{font-size:12px;color:var(--muted);margin-bottom:10px}
-.stat-value{font-size:19px;font-weight:900;direction:ltr;text-align:right}
-.green{color:var(--green)}
-.red{color:var(--red)}
-.stat-icon{
-  width:33px;height:33px;border-radius:11px;display:grid;
-  place-items:center;margin-bottom:10px;font-size:18px;
-}
-.green-bg{background:var(--green-bg);color:var(--green)}
-.red-bg{background:var(--red-bg);color:var(--red)}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 12px}
+.stat{background:white;padding:15px;border-radius:17px}
+.stat-label{color:var(--muted);font-size:12px;margin:8px 0}
+.stat-number{font-size:18px;font-weight:bold;direction:ltr;text-align:right}
+.green{color:var(--green)}.red{color:var(--red)}
+.stat-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.green-bg{background:#e5f8ef;color:var(--green)}
+.red-bg{background:#fff0f2;color:var(--red)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 12px}
 .section-head h3{margin:0}
-.link-btn{border:0;background:none;color:var(--primary);font-size:12px}
-.transaction{
-  display:flex;align-items:center;gap:11px;padding:12px 0;
-  border-bottom:1px solid var(--line);
+.link{border:0;background:none;color:var(--purple)}
+.empty{text-align:center;padding:28px 8px;color:var(--muted);line-height:2}
+label{display:block;font-weight:bold;font-size:12px;margin:17px 0 8px}
+input,select{
+  width:100%;height:50px;border:1px solid #e5e3eb;border-radius:14px;
+  padding:0 14px;background:#fff;color:var(--ink);outline:none;
 }
+input:focus,select:focus{border-color:var(--purple)}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.type-btn{height:58px;border:2px solid var(--line);border-radius:16px;background:#f7f6fa;color:#777;font-weight:bold}
+.type-btn.active-income{background:#e5f8ef;color:var(--green);border-color:var(--green)}
+.type-btn.active-expense{background:#fff0f2;color:var(--red);border-color:var(--red)}
+.date-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.date-grid select{text-align:center;padding:0 5px}
+.transaction{display:flex;align-items:center;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}
 .transaction:last-child{border-bottom:0}
-.tx-icon{
-  width:42px;height:42px;border-radius:14px;display:grid;
-  place-items:center;font-size:18px;flex-shrink:0;
-}
+.tx-icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
 .tx-info{flex:1;min-width:0}
 .tx-title{font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tx-sub{font-size:11px;color:var(--muted);margin-top:6px}
-.tx-amount{font-weight:900;direction:ltr;white-space:nowrap}
-.empty{text-align:center;color:var(--muted);padding:28px 8px;font-size:13px}
-label{display:block;font-size:12px;font-weight:bold;margin:15px 0 8px}
-input,select{
-  width:100%;border:1px solid var(--line);background:#faf9fd;
-  color:var(--ink);border-radius:12px;padding:13px;outline:none;
-  min-height:46px;
+.tx-date{font-size:11px;color:var(--muted);margin-top:6px}
+.tx-amount{font-weight:bold;direction:ltr;white-space:nowrap}
+.primary{
+  width:100%;height:55px;border:0;border-radius:15px;
+  color:white;background:linear-gradient(110deg,#5743df,#8978f4);
+  font-weight:bold;font-size:16px;
 }
-input:focus,select:focus{border-color:var(--primary)}
-.type-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.type-btn{
-  border:2px solid var(--line);border-radius:13px;padding:13px;
-  background:#f7f6fa;font-weight:bold;color:#777;
+.save-dock{
+  display:none;position:fixed;z-index:20;bottom:77px;left:0;right:0;
+  padding:10px 16px;background:linear-gradient(transparent,var(--bg) 20%);
 }
-.type-btn.selected.income{
-  background:var(--green-bg);border-color:var(--green);color:var(--green);
-}
-.type-btn.selected.expense{
-  background:var(--red-bg);border-color:var(--red);color:var(--red);
-}
-.date-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.primary-btn{
-  width:100%;border:0;border-radius:14px;padding:16px;
-  background:linear-gradient(110deg,#5743df,#8978f4);
-  color:white;font-weight:900;font-size:16px;margin-top:20px;
-  min-height:54px;box-shadow:0 5px 15px #5743df35;
-}
-.secondary-btn{
-  border:1px solid var(--line);background:#f8f7fb;
-  border-radius:11px;padding:10px 13px;color:var(--ink);
-}
-.danger-btn{border:0;background:var(--red-bg);color:var(--red);border-radius:10px;padding:9px 12px}
-.small-btn{border:0;background:#f0edff;color:var(--primary);border-radius:10px;padding:9px 12px}
-.actions{display:flex;gap:7px;margin-top:10px}
-.filter-row{display:flex;gap:8px;margin-bottom:12px}
-.filter-row select{flex:1}
-.chart-bars{display:flex;align-items:end;gap:12px;height:155px;padding:15px 5px 0}
-.bar-group{flex:1;text-align:center;min-width:0}
-.bar-pair{height:115px;display:flex;align-items:end;justify-content:center;gap:4px}
-.bar{width:13px;min-height:3px;border-radius:6px 6px 2px 2px}
-.bar.income{background:var(--green)}
-.bar.expense{background:var(--red)}
-.bar-label{font-size:10px;color:var(--muted);margin-top:8px}
-.legend{display:flex;gap:15px;font-size:11px;color:var(--muted);margin-top:12px}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px}
-.report-line{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)}
-.report-line:last-child{border:0}
+body.adding .save-dock{display:block}
+body.adding{padding-bottom:160px}
 .bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:10;
-  background:var(--card);border-top:1px solid var(--line);
-  display:flex;justify-content:space-around;padding:9px 5px calc(9px + env(safe-area-inset-bottom));
+  position:fixed;bottom:0;left:0;right:0;z-index:30;
+  display:flex;justify-content:space-around;background:#fff;
+  border-top:1px solid var(--line);padding:9px 4px calc(9px + env(safe-area-inset-bottom));
   max-width:600px;margin:auto;
 }
-.nav-btn{
-  flex:1;border:0;background:none;color:var(--muted);
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  font-size:10px;padding:5px 0;
-}
+.nav-btn{flex:1;border:0;background:none;color:var(--muted);font-size:10px;display:flex;flex-direction:column;align-items:center;gap:5px;padding:5px 0}
 .nav-btn span{font-size:20px}
-.nav-btn.active{color:var(--primary);font-weight:bold}
-.setting-row{margin-bottom:15px}
-.color-options{display:flex;gap:12px;flex-wrap:wrap}
-.color-choice{
-  width:35px;height:35px;border-radius:50%;border:3px solid white;
-  outline:1px solid #ddd;cursor:pointer;
-}
-.notice{font-size:11px;color:var(--muted);line-height:1.8;margin-top:12px}
-.hidden{display:none!important}
+.nav-btn.active{color:var(--purple);font-weight:bold}
+.nav-btn.add{font-size:24px;color:var(--purple)}
+.nav-btn.add span{width:42px;height:42px;border-radius:15px;background:#eeeaff;display:grid;place-items:center}
+.chart{height:155px;display:flex;align-items:end;gap:12px;padding:12px 4px}
+.chart-col{flex:1;text-align:center}
+.bars{height:115px;display:flex;align-items:end;justify-content:center;gap:4px}
+.bar{width:13px;border-radius:6px 6px 2px 2px;min-height:3px}
+.bar-label{font-size:10px;color:var(--muted);margin-top:8px}
+.legend{font-size:11px;color:var(--muted);display:flex;gap:15px}
+.dot{width:8px;height:8px;display:inline-block;border-radius:50%;margin-left:5px}
+.report-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)}
+.filter{display:flex;gap:8px;margin-bottom:10px}
+.filter select{flex:1;min-width:0}
+.action-row{display:flex;gap:7px;margin:8px 0 12px}
+.action-row button{border:0;border-radius:9px;padding:8px 12px}
+.edit-btn{background:#f0edff;color:var(--purple)}
+.delete-btn{background:#fff0f2;color:var(--red)}
+.setting{margin-bottom:15px}
+.color-list{display:flex;gap:12px}
+.color-choice{width:34px;height:34px;border-radius:50%;border:2px solid white;outline:1px solid #ddd}
+.note{font-size:11px;color:var(--muted);line-height:2}
 </style>
 </head>
 <body>
 <div class="app">
 <header>
-  <div class="brand"><span id="appName">دخل‌وخرج من</span><small id="todayText">مدیریت دخل و خرج روزانه</small></div>
+  <div>
+    <div class="brand" id="appName">دخل‌وخرج من</div>
+    <div class="sub" id="todayText">مدیریت دخل و خرج روزانه</div>
+  </div>
   <div class="avatar">د</div>
 </header>
 
-<!-- خانه -->
 <section class="page active" id="home">
   <div class="balance">
-    <div class="caption">موجودی کل</div>
-    <div class="number" id="balance">0</div>
-    <div class="unit">تومان</div>
+    <div class="balance-label">موجودی کل</div>
+    <div class="balance-number" id="balance">0</div>
+    <div class="balance-unit">تومان</div>
   </div>
   <div class="stats">
     <div class="stat">
       <div class="stat-icon green-bg">↗</div>
       <div class="stat-label">مجموع درآمد</div>
-      <div class="stat-value green" id="totalIncome">0</div>
+      <div class="stat-number green" id="incomeTotal">0</div>
     </div>
     <div class="stat">
       <div class="stat-icon red-bg">↙</div>
       <div class="stat-label">مجموع هزینه</div>
-      <div class="stat-value red" id="totalExpense">0</div>
+      <div class="stat-number red" id="expenseTotal">0</div>
     </div>
   </div>
   <div class="section-head">
     <h3>آخرین تراکنش‌ها</h3>
-    <button class="link-btn" onclick="showPage('reports')">مشاهده همه</button>
+    <button class="link" onclick="showPage('reports')">مشاهده همه</button>
   </div>
   <div class="card" id="recentList"></div>
 </section>
 
-<!-- ثبت -->
 <section class="page" id="add">
-  <h2 id="formHeading">ثبت تراکنش جدید</h2>
+  <h2 id="formTitle">ثبت تراکنش جدید</h2>
   <div class="card">
-    <form id="form">
+    <form id="entryForm">
       <label>نوع تراکنش</label>
-      <div class="type-buttons">
-        <button type="button" id="incomeBtn" class="type-btn selected income" onclick="setType('income')">＋ درآمد</button>
+      <div class="type-grid">
+        <button type="button" id="incomeBtn" class="type-btn active-income" onclick="setType('income')">＋ درآمد</button>
         <button type="button" id="expenseBtn" class="type-btn" onclick="setType('expense')">− هزینه</button>
       </div>
       <input type="hidden" id="type" value="income">
@@ -204,63 +152,54 @@ input:focus,select:focus{border-color:var(--primary)}
       <label for="amount">مبلغ (تومان)</label>
       <input id="amount" type="text" inputmode="numeric" placeholder="مثلاً 250000" required>
 
-      <label for="reason">شرح تراکنش</label>
-      <input id="reason" type="text" placeholder="مثلاً خرید روزانه، حقوق، فروش..." required>
+      <label for="reason">بابت چی بوده؟</label>
+      <input id="reason" type="text" placeholder="مثلاً خرید روزانه" required>
 
       <label for="category">دسته‌بندی</label>
       <select id="category">
-        <option>عمومی</option>
-        <option>خوراک</option>
-        <option>رفت‌وآمد</option>
-        <option>خرید</option>
-        <option>حقوق</option>
-        <option>فروش</option>
-        <option>قبض و خدمات</option>
-        <option>تفریح</option>
-        <option>سایر</option>
+        <option>عمومی</option><option>خوراک</option><option>رفت‌وآمد</option>
+        <option>خرید</option><option>حقوق</option><option>فروش</option>
+        <option>قبض و خدمات</option><option>تفریح</option><option>سایر</option>
       </select>
 
       <label>تاریخ شمسی</label>
-      <div class="date-row">
+      <div class="date-grid">
         <select id="year"></select>
         <select id="month"></select>
         <select id="day"></select>
       </div>
-
-      <button type="submit" class="primary-btn" id="saveTransaction">ثبت و ذخیره تراکنش</button>
-      <button type="button" class="secondary-btn hidden" id="cancelEdit" style="width:100%;margin-top:9px" onclick="cancelEdit()">لغو ویرایش</button>
+      <div style="height:15px"></div>
     </form>
   </div>
+  <div class="note">تاریخ به‌صورت شمسی ذخیره می‌شود. اطلاعات روی همین دستگاه نگهداری می‌شود.</div>
 </section>
 
-<!-- نمودار -->
 <section class="page" id="charts">
   <h2>نمودار دخل و خرج</h2>
   <div class="card">
-    <h3>مقایسه درآمد و هزینه ماهانه</h3>
-    <div id="chartBars" class="chart-bars"></div>
+    <h3>مقایسه شش ماه اخیر</h3>
+    <div class="chart" id="chart"></div>
     <div class="legend">
       <span><i class="dot" style="background:var(--green)"></i>درآمد</span>
       <span><i class="dot" style="background:var(--red)"></i>هزینه</span>
     </div>
   </div>
   <div class="card">
-    <h3>خلاصه این ماه</h3>
-    <div class="report-line"><span>درآمد ماه</span><b class="green" id="monthIncome">0</b></div>
-    <div class="report-line"><span>هزینه ماه</span><b class="red" id="monthExpense">0</b></div>
-    <div class="report-line"><span>مانده ماه</span><b id="monthBalance">0</b></div>
+    <h3>خلاصه ماه جاری</h3>
+    <div class="report-row"><span>درآمد</span><b class="green" id="monthIncome">0</b></div>
+    <div class="report-row"><span>هزینه</span><b class="red" id="monthExpense">0</b></div>
+    <div class="report-row"><span>مانده</span><b id="monthBalance">0</b></div>
   </div>
 </section>
 
-<!-- گزارش -->
 <section class="page" id="reports">
   <h2>گزارش تراکنش‌ها</h2>
   <div class="card">
-    <div class="filter-row">
+    <div class="filter">
       <select id="filterType" onchange="renderReports()">
         <option value="all">همه تراکنش‌ها</option>
-        <option value="income">فقط درآمدها</option>
-        <option value="expense">فقط هزینه‌ها</option>
+        <option value="income">درآمدها</option>
+        <option value="expense">هزینه‌ها</option>
       </select>
       <select id="filterMonth" onchange="renderReports()">
         <option value="all">همه ماه‌ها</option>
@@ -276,17 +215,16 @@ input:focus,select:focus{border-color:var(--primary)}
   </div>
 </section>
 
-<!-- تنظیمات -->
 <section class="page" id="settings">
-  <h2>تنظیمات برنامه</h2>
+  <h2>تنظیمات</h2>
   <div class="card">
-    <div class="setting-row">
-      <label for="nameSetting">نام دلخواه برنامه</label>
-      <input id="nameSetting" placeholder="مثلاً دخل‌وخرج من">
+    <div class="setting">
+      <label for="nameSetting">اسم برنامه</label>
+      <input id="nameSetting" placeholder="اسم دلخواه">
     </div>
-    <div class="setting-row">
-      <label>رنگ اصلی برنامه</label>
-      <div class="color-options">
+    <div class="setting">
+      <label>رنگ اصلی</label>
+      <div class="color-list">
         <button class="color-choice" style="background:#6554d9" onclick="setAccent('#6554d9')"></button>
         <button class="color-choice" style="background:#168b75" onclick="setAccent('#168b75')"></button>
         <button class="color-choice" style="background:#2878c7" onclick="setAccent('#2878c7')"></button>
@@ -294,387 +232,247 @@ input:focus,select:focus{border-color:var(--primary)}
         <button class="color-choice" style="background:#bd4c83" onclick="setAccent('#bd4c83')"></button>
       </div>
     </div>
-    <div class="setting-row">
-      <label for="bgSetting">رنگ زمینه</label>
-      <select id="bgSetting" onchange="setBackground(this.value)">
-        <option value="#f7f6fc">بنفش روشن</option>
-        <option value="#f3f7f5">سبز خیلی روشن</option>
-        <option value="#f2f6fb">آبی روشن</option>
+    <div class="setting">
+      <label for="backgroundSetting">رنگ زمینه</label>
+      <select id="backgroundSetting" onchange="setBackground(this.value)">
+        <option value="#f5f4fa">بنفش روشن</option>
+        <option value="#f1f7f4">سبز روشن</option>
+        <option value="#f1f6fb">آبی روشن</option>
         <option value="#fff8f1">کرم روشن</option>
-        <option value="#f5f5f5">خاکستری روشن</option>
       </select>
     </div>
-    <button class="primary-btn" onclick="saveSettings()">ذخیره تنظیمات</button>
-    <p class="notice">اطلاعات تراکنش‌ها روی حافظه همین مرورگر ذخیره می‌شود. با پاک کردن داده‌های مرورگر ممکن است اطلاعات برنامه هم پاک شود.</p>
+    <button class="primary" type="button" onclick="saveSettings()">ذخیره تنظیمات</button>
+    <p class="note">اطلاعات در حافظه مرورگر همین دستگاه ذخیره می‌شود. داده‌های مرورگر را پاک نکنی تا اطلاعاتت باقی بماند.</p>
   </div>
 </section>
 </div>
 
+<!-- دکمه ثبت همیشه بالای نوار پایین دیده می‌شود -->
+<div class="save-dock" id="saveDock">
+  <button class="primary" type="submit" form="entryForm" id="saveButton">ثبت و ذخیره تراکنش</button>
+</div>
+
 <nav class="bottom-nav">
   <button class="nav-btn active" data-page="home" onclick="showPage('home')"><span>⌂</span>خانه</button>
-  <button class="nav-btn" data-page="add" onclick="startNewEntry()"><span>＋</span>ثبت</button>
   <button class="nav-btn" data-page="charts" onclick="showPage('charts')"><span>▥</span>نمودار</button>
+  <button class="nav-btn add" onclick="newEntry()"><span>＋</span>ثبت</button>
   <button class="nav-btn" data-page="reports" onclick="showPage('reports')"><span>▤</span>گزارش</button>
   <button class="nav-btn" data-page="settings" onclick="showPage('settings')"><span>⚙</span>تنظیمات</button>
 </nav>
 
 <script>
-'use strict';
+const $=id=>document.getElementById(id);
+const KEY='dk_entries';
+const months=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+let entries=[];
+let editId=null;
 
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = 'dk_entries';
-let entries = [];
-let editingId = null;
-let currentType = 'income';
-
-const monthNames = [
-  'فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور',
-  'مهر','آبان','آذر','دی','بهمن','اسفند'
-];
-
-function todayJalali(){
-  const parts = new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{
-    year:'numeric',month:'2-digit',day:'2-digit'
-  }).formatToParts(new Date());
-  const get = type => parts.find(p=>p.type===type)?.value || '01';
-  return {year:Number(get('year')),month:Number(get('month')),day:Number(get('day'))};
+function number(v){return Math.round(Number(v)||0).toLocaleString('en-US')}
+function onlyDigits(v){return String(v||'').replace(/[^\d]/g,'')}
+function escapeHTML(v){
+ return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
-function formatNumber(value){
-  return Math.round(Number(value)||0).toLocaleString('en-US');
+function today(){
+ const p=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const get=t=>p.find(x=>x.type===t)?.value||'01';
+ return {y:+get('year'),m:+get('month'),d:+get('day')};
 }
-
-function digitsOnly(value){
-  return String(value||'').replace(/[^\d]/g,'');
-}
-
-function getDateValue(){
-  return `${$('year').value}/${String($('month').value).padStart(2,'0')}/${String($('day').value).padStart(2,'0')}`;
-}
-
+function dateString(){return `${$('year').value}/${$('month').value}/${$('day').value}`}
 function setupDate(){
-  const today = todayJalali();
-  const yearSelect = $('year');
-  const monthSelect = $('month');
-  const daySelect = $('day');
-
-  yearSelect.innerHTML = '';
-  for(let y=today.year-5;y<=today.year+2;y++){
-    yearSelect.add(new Option(String(y),String(y)));
-  }
-  monthSelect.innerHTML = '';
-  monthNames.forEach((m,i)=>monthSelect.add(new Option(m,String(i+1).padStart(2,'0'))));
-  daySelect.innerHTML = '';
-  for(let d=1;d<=31;d++) daySelect.add(new Option(String(d),String(d).padStart(2,'0')));
-
-  yearSelect.value=String(today.year);
-  monthSelect.value=String(today.month).padStart(2,'0');
-  daySelect.value=String(today.day).padStart(2,'0');
+ const t=today();
+ $('year').innerHTML='';
+ for(let y=t.y-5;y<=t.y+2;y++)$('year').add(new Option(y,y));
+ $('month').innerHTML='';
+ months.forEach((m,i)=>$('month').add(new Option(m,String(i+1).padStart(2,'0'))));
+ $('day').innerHTML='';
+ for(let d=1;d<=31;d++)$('day').add(new Option(d,String(d).padStart(2,'0')));
+ $('year').value=t.y;
+ $('month').value=String(t.m).padStart(2,'0');
+ $('day').value=String(t.d).padStart(2,'0');
 }
-
 function setType(type){
-  currentType=type;
-  $('type').value=type;
-  $('incomeBtn').classList.toggle('selected',type==='income');
-  $('incomeBtn').classList.toggle('income',type==='income');
-  $('expenseBtn').classList.toggle('selected',type==='expense');
-  $('expenseBtn').classList.toggle('expense',type==='expense');
+ $('type').value=type;
+ $('incomeBtn').className='type-btn'+(type==='income'?' active-income':'');
+ $('expenseBtn').className='type-btn'+(type==='expense'?' active-expense':'');
 }
-
-function showPage(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  $(page).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>{
-    b.classList.toggle('active',b.dataset.page===page);
-  });
-  if(page==='reports') renderReports();
-  if(page==='charts') renderCharts();
-  if(page==='home') renderHome();
-  window.scrollTo(0,0);
+function load(){
+ try{
+  const old=JSON.parse(localStorage.getItem(KEY)||'[]');
+  entries=Array.isArray(old)?old.map((x,i)=>({
+   id:x.id??(Date.now()+i),
+   type:x.type==='expense'?'expense':'income',
+   amount:Number(x.amount)||0,
+   reason:String(x.reason??x.description??x.title??''),
+   date:String(x.date??''),
+   category:String(x.category??'عمومی')
+  })):[];
+ }catch(e){entries=[]}
 }
-
-function startNewEntry(){
-  resetForm();
-  showPage('add');
+function save(){
+ try{localStorage.setItem(KEY,JSON.stringify(entries));return true}
+ catch(e){alert('ذخیره‌سازی انجام نشد. حافظه مرورگر را بررسی کن.');return false}
 }
-
-function resetForm(){
-  editingId=null;
-  $('form').reset();
-  setupDate();
-  setType('income');
-  $('formHeading').textContent='ثبت تراکنش جدید';
-  $('saveTransaction').textContent='ثبت و ذخیره تراکنش';
-  $('cancelEdit').classList.add('hidden');
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $(id).classList.add('active');
+ document.body.classList.toggle('adding',id==='add');
+ document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ if(id==='home')renderHome();
+ if(id==='reports')renderReports();
+ if(id==='charts')renderCharts();
+ window.scrollTo(0,0);
 }
-
-function cancelEdit(){resetForm();}
-
-function loadEntries(){
-  try{
-    const saved=localStorage.getItem(STORAGE_KEY);
-    const parsed=saved?JSON.parse(saved):[];
-    entries=Array.isArray(parsed)?parsed.map((item,index)=>({
-      id:item.id ?? (Date.now()+index),
-      type:item.type==='expense'?'expense':'income',
-      amount:Number(item.amount)||0,
-      reason:String(item.reason ?? item.description ?? item.title ?? ''),
-      date:String(item.date ?? ''),
-      category:String(item.category ?? 'عمومی')
-    })): [];
-  }catch(e){
-    entries=[];
-    alert('خواندن اطلاعات ذخیره‌شده با مشکل روبه‌رو شد.');
-  }
+function newEntry(){
+ editId=null;
+ $('entryForm').reset();
+ setupDate();
+ setType('income');
+ $('formTitle').textContent='ثبت تراکنش جدید';
+ $('saveButton').textContent='ثبت و ذخیره تراکنش';
+ showPage('add');
 }
-
-function saveEntries(){
-  try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(entries));
-    return true;
-  }catch(e){
-    alert('ذخیره اطلاعات انجام نشد. فضای ذخیره‌سازی مرورگر را بررسی کن.');
-    return false;
-  }
-}
-
 $('amount').addEventListener('input',e=>{
-  const value=digitsOnly(e.target.value);
-  e.target.value=value?formatNumber(value):'';
+ const v=onlyDigits(e.target.value);
+ e.target.value=v?number(v):'';
 });
-
-$('form').addEventListener('submit',e=>{
-  e.preventDefault();
-
-  const amount=Number(digitsOnly($('amount').value));
-  const reason=$('reason').value.trim();
-  const date=getDateValue();
-  const category=$('category').value;
-
-  if(!amount || amount<=0){
-    alert('لطفاً مبلغ معتبر وارد کن.');
-    $('amount').focus();
-    return;
-  }
-  if(!reason){
-    alert('لطفاً شرح تراکنش را وارد کن.');
-    $('reason').focus();
-    return;
-  }
-
-  const record={
-    id:editingId ?? Date.now(),
-    type:$('type').value,
-    amount,
-    reason,
-    date,
-    category
-  };
-
-  if(editingId!==null){
-    const index=entries.findIndex(x=>String(x.id)===String(editingId));
-    if(index!==-1) entries[index]=record;
-  }else{
-    entries.push(record);
-  }
-
-  if(!saveEntries()) return;
-
-  alert(editingId!==null?'تراکنش ویرایش و ذخیره شد.':'تراکنش با موفقیت ثبت و ذخیره شد.');
-  resetForm();
-  renderAll();
-  showPage('home');
+$('entryForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const amount=Number(onlyDigits($('amount').value));
+ const reason=$('reason').value.trim();
+ if(!amount||amount<=0){alert('مبلغ را درست وارد کن.');$('amount').focus();return}
+ if(!reason){alert('شرح تراکنش را بنویس.');$('reason').focus();return}
+ const item={
+  id:editId??Date.now(),
+  type:$('type').value,
+  amount,
+  reason,
+  date:dateString(),
+  category:$('category').value
+ };
+ if(editId!==null){
+  const i=entries.findIndex(x=>String(x.id)===String(editId));
+  if(i>=0)entries[i]=item;
+ }else entries.push(item);
+ if(!save())return;
+ alert(editId!==null?'تغییرات ذخیره شد.':'تراکنش ثبت و ذخیره شد.');
+ newEntry();
+ showPage('home');
 });
-
-function editEntry(id){
-  const item=entries.find(x=>String(x.id)===String(id));
-  if(!item)return;
-  editingId=item.id;
-  showPage('add');
-  $('formHeading').textContent='ویرایش تراکنش';
-  $('saveTransaction').textContent='ذخیره تغییرات';
-  $('cancelEdit').classList.remove('hidden');
-  setType(item.type);
-  $('amount').value=formatNumber(item.amount);
-  $('reason').value=item.reason;
-  $('category').value=item.category;
-
-  const parts=item.date.split('/');
-  if(parts.length===3){
-    $('year').value=parts[0];
-    $('month').value=parts[1].padStart(2,'0');
-    $('day').value=parts[2].padStart(2,'0');
-  }
-}
-
-function deleteEntry(id){
-  if(!confirm('این تراکنش حذف شود؟'))return;
-  entries=entries.filter(x=>String(x.id)!==String(id));
-  if(saveEntries())renderAll();
-}
-
-function transactionHTML(item){
-  const income=item.type==='income';
-  const icon=income?'↗':'↙';
-  const sign=income?'+':'−';
-  const color=income?'green':'red';
-  const bg=income?'green-bg':'red-bg';
-  return `<div class="transaction">
-    <div class="tx-icon ${bg}">${icon}</div>
-    <div class="tx-info">
-      <div class="tx-title">${escapeHTML(item.reason||'بدون شرح')}</div>
-      <div class="tx-sub">${escapeHTML(item.date)} · ${escapeHTML(item.category)}</div>
-    </div>
-    <div class="tx-amount ${color}">${sign}${formatNumber(item.amount)}</div>
-  </div>`;
-}
-
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g,char=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[char]));
-}
-
 function totals(list){
-  let income=0,expense=0;
-  list.forEach(x=>{
-    if(x.type==='income')income+=Number(x.amount)||0;
-    else expense+=Number(x.amount)||0;
-  });
-  return {income,expense,balance:income-expense};
+ let income=0,expense=0;
+ list.forEach(x=>x.type==='income'?income+=x.amount:expense+=x.amount);
+ return {income,expense,balance:income-expense};
 }
-
+function txHTML(x){
+ const inc=x.type==='income';
+ return `<div class="transaction">
+ <div class="tx-icon ${inc?'green-bg':'red-bg'}">${inc?'↗':'↙'}</div>
+ <div class="tx-info"><div class="tx-title">${escapeHTML(x.reason)}</div>
+ <div class="tx-date">${escapeHTML(x.date)} · ${escapeHTML(x.category)}</div></div>
+ <div class="tx-amount ${inc?'green':'red'}">${inc?'+':'−'}${number(x.amount)}</div>
+ </div>`;
+}
 function renderHome(){
-  const t=totals(entries);
-  $('balance').textContent=formatNumber(t.balance);
-  $('totalIncome').textContent=formatNumber(t.income);
-  $('totalExpense').textContent=formatNumber(t.expense);
-  const recent=[...entries].sort((a,b)=>Number(b.id)-Number(a.id)).slice(0,5);
-  $('recentList').innerHTML=recent.length
-    ?recent.map(transactionHTML).join('')
-    :'<div class="empty">هنوز تراکنشی ثبت نکردی.<br>از قسمت ثبت، اولین درآمد یا هزینه‌ات را وارد کن.</div>';
+ const t=totals(entries);
+ $('balance').textContent=number(t.balance);
+ $('incomeTotal').textContent=number(t.income);
+ $('expenseTotal').textContent=number(t.expense);
+ const list=[...entries].sort((a,b)=>Number(b.id)-Number(a.id)).slice(0,6);
+ $('recentList').innerHTML=list.length?list.map(txHTML).join(''):'<div class="empty">هنوز تراکنشی ثبت نکردی.<br>از دکمه + برای ثبت اولین تراکنش استفاده کن.</div>';
 }
-
 function renderReports(){
-  const type=$('filterType').value;
-  const month=$('filterMonth').value;
-  let list=[...entries].filter(x=>{
-    const typeOK=type==='all'||x.type===type;
-    const monthOK=month==='all'||x.date.split('/')[1]===month;
-    return typeOK&&monthOK;
-  }).sort((a,b)=>Number(b.id)-Number(a.id));
-
-  $('allList').innerHTML=list.length?list.map(item=>`
-    <div style="padding:12px 0;border-bottom:1px solid var(--line)">
-      ${transactionHTML(item)}
-      <div class="actions">
-        <button class="small-btn" onclick="editEntry('${String(item.id).replace(/'/g,'')}')">ویرایش</button>
-        <button class="danger-btn" onclick="deleteEntry('${String(item.id).replace(/'/g,'')}')">حذف</button>
-      </div>
-    </div>`).join(''):'<div class="empty">تراکنشی برای نمایش وجود ندارد.</div>';
+ const type=$('filterType').value;
+ const month=$('filterMonth').value;
+ const list=[...entries].filter(x=>(type==='all'||x.type===type)&&(month==='all'||x.date.split('/')[1]===month)).sort((a,b)=>Number(b.id)-Number(a.id));
+ $('allList').innerHTML=list.length?list.map(x=>`
+ <div>
+ ${txHTML(x)}
+ <div class="action-row">
+ <button class="edit-btn" onclick="editEntry('${String(x.id)}')">ویرایش</button>
+ <button class="delete-btn" onclick="deleteEntry('${String(x.id)}')">حذف</button>
+ </div></div>`).join(''):'<div class="empty">تراکنشی برای نمایش وجود ندارد.</div>';
 }
-
+function editEntry(id){
+ const x=entries.find(a=>String(a.id)===String(id));
+ if(!x)return;
+ editId=x.id;
+ setupDate();
+ setType(x.type);
+ $('formTitle').textContent='ویرایش تراکنش';
+ $('saveButton').textContent='ذخیره تغییرات';
+ $('amount').value=number(x.amount);
+ $('reason').value=x.reason;
+ $('category').value=x.category;
+ const d=x.date.split('/');
+ if(d.length===3){
+  if([...$('year').options].some(o=>o.value===d[0]))$('year').value=d[0];
+  $('month').value=d[1].padStart(2,'0');
+  $('day').value=d[2].padStart(2,'0');
+ }
+ showPage('add');
+}
+function deleteEntry(id){
+ if(!confirm('این تراکنش حذف شود؟'))return;
+ entries=entries.filter(x=>String(x.id)!==String(id));
+ if(save()){renderReports();renderHome();renderCharts()}
+}
 function renderCharts(){
-  const today=todayJalali();
-  const monthKey=String(today.month).padStart(2,'0');
-  const monthList=entries.filter(x=>x.date.startsWith(`${today.year}/${monthKey}/`));
-  const t=totals(monthList);
-  $('monthIncome').textContent=formatNumber(t.income);
-  $('monthExpense').textContent=formatNumber(t.expense);
-  $('monthBalance').textContent=formatNumber(t.balance);
-
-  const lastMonths=[];
-  for(let i=5;i>=0;i--){
-    let m=today.month-i,y=today.year;
-    while(m<=0){m+=12;y--;}
-    lastMonths.push({year:y,month:String(m).padStart(2,'0')});
-  }
-
-  const values=lastMonths.map(x=>{
-    const list=entries.filter(e=>e.date.startsWith(`${x.year}/${x.month}/`));
-    const sum=totals(list);
-    return {...x,...sum};
-  });
-  const max=Math.max(1,...values.flatMap(x=>[x.income,x.expense]));
-  $('chartBars').innerHTML=values.map(x=>{
-    const inHeight=Math.max(3,x.income/max*105);
-    const exHeight=Math.max(3,x.expense/max*105);
-    const label=monthNames[Number(x.month)-1].slice(0,3);
-    return `<div class="bar-group">
-      <div class="bar-pair">
-        <div class="bar income" style="height:${inHeight}px" title="درآمد ${formatNumber(x.income)}"></div>
-        <div class="bar expense" style="height:${exHeight}px" title="هزینه ${formatNumber(x.expense)}"></div>
-      </div>
-      <div class="bar-label">${label}</div>
-    </div>`;
-  }).join('');
+ const t=today();
+ const current=entries.filter(x=>x.date.startsWith(`${t.y}/${String(t.m).padStart(2,'0')}/`));
+ const sum=totals(current);
+ $('monthIncome').textContent=number(sum.income);
+ $('monthExpense').textContent=number(sum.expense);
+ $('monthBalance').textContent=number(sum.balance);
+ const periods=[];
+ for(let i=5;i>=0;i--){
+  let m=t.m-i,y=t.y;
+  while(m<=0){m+=12;y--}
+  periods.push({y,m:String(m).padStart(2,'0')});
+ }
+ const data=periods.map(p=>{
+  const a=totals(entries.filter(x=>x.date.startsWith(`${p.y}/${p.m}/`)));
+  return {...p,...a};
+ });
+ const max=Math.max(1,...data.flatMap(x=>[x.income,x.expense]));
+ $('chart').innerHTML=data.map(x=>`
+ <div class="chart-col"><div class="bars">
+ <div class="bar" style="height:${Math.max(3,x.income/max*105)}px;background:var(--green)" title="${number(x.income)}"></div>
+ <div class="bar" style="height:${Math.max(3,x.expense/max*105)}px;background:var(--red)" title="${number(x.expense)}"></div>
+ </div><div class="bar-label">${months[Number(x.m)-1].slice(0,3)}</div></div>`).join('');
 }
-
-function renderAll(){
-  renderHome();
-  renderReports();
-  renderCharts();
+function setAccent(c){
+ document.documentElement.style.setProperty('--purple',c);
+ const s=readStyle();s.accent=c;localStorage.setItem('dk_style',JSON.stringify(s));
 }
-
-function setAccent(color){
-  document.documentElement.style.setProperty('--primary',color);
-  document.querySelector('.balance').style.background=`linear-gradient(135deg,${color},${color}bb)`;
-  localStorage.setItem('dk_style',JSON.stringify({
-    ...(readStyle()),accent:color
-  }));
+function setBackground(c){
+ document.documentElement.style.setProperty('--bg',c);
+ const s=readStyle();s.background=c;localStorage.setItem('dk_style',JSON.stringify(s));
 }
-
-function setBackground(color){
-  document.documentElement.style.setProperty('--bg',color);
-  localStorage.setItem('dk_style',JSON.stringify({
-    ...(readStyle()),background:color
-  }));
-}
-
-function readStyle(){
-  try{return JSON.parse(localStorage.getItem('dk_style')||'{}')||{};}
-  catch(e){return {};}
-}
-
-function applyStyle(){
-  const style=readStyle();
-  if(style.accent){
-    document.documentElement.style.setProperty('--primary',style.accent);
-    document.querySelector('.balance').style.background=`linear-gradient(135deg,${style.accent},${style.accent}bb)`;
-  }
-  if(style.background){
-    document.documentElement.style.setProperty('--bg',style.background);
-    $('bgSetting').value=style.background;
-  }
-  const name=localStorage.getItem('dk_user_name');
-  if(name){
-    $('appName').textContent=name;
-    $('nameSetting').value=name;
-  }
-}
-
+function readStyle(){try{return JSON.parse(localStorage.getItem('dk_style')||'{}')}catch(e){return {}}}
 function saveSettings(){
-  const name=$('nameSetting').value.trim()||'دخل‌وخرج من';
-  localStorage.setItem('dk_user_name',name);
-  $('appName').textContent=name;
-  alert('تنظیمات ذخیره شد.');
+ const name=$('nameSetting').value.trim()||'دخل‌وخرج من';
+ localStorage.setItem('dk_user_name',name);
+ $('appName').textContent=name;
+ alert('تنظیمات ذخیره شد.');
 }
-
+function applySettings(){
+ const name=localStorage.getItem('dk_user_name');
+ if(name){$('appName').textContent=name;$('nameSetting').value=name}
+ const s=readStyle();
+ if(s.accent)document.documentElement.style.setProperty('--purple',s.accent);
+ if(s.background){document.documentElement.style.setProperty('--bg',s.background);$('backgroundSetting').value=s.background}
+}
 function init(){
-  setupDate();
-  loadEntries();
-  applyStyle();
-  const today=todayJalali();
-  $('todayText').textContent=`امروز ${today.day} ${monthNames[today.month-1]} ${today.year}`;
-  renderAll();
-
-  if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>{
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    });
-  }
+ setupDate();
+ load();
+ applySettings();
+ const t=today();
+ $('todayText').textContent=`امروز ${t.d} ${months[t.m-1]} ${t.y}`;
+ renderHome();
+ if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+ }
 }
-
 init();
 </script>
 </body>
