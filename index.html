@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
@@ -8,36 +9,50 @@
 <title>دخل‌وخرج من</title>
 <style>
 :root{--bg:#f7f6fc;--card:#fff;--ink:#24213a;--muted:#8b879d;--purple:#5743df;--pink:#f36b91;--line:#eeeaf7;--green:#25a879;--red:#e65c78}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;padding:0 0 88px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;padding:0 0 88px}
 .app{max-width:560px;margin:auto;padding:18px 16px 22px}
 header{display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px}
-h1{font-size:22px;margin:0 0 5px} .sub{font-size:12px;color:var(--muted)}
+h1{font-size:22px;margin:0 0 5px}
+.sub{font-size:12px;color:var(--muted)}
 .avatar{width:42px;height:42px;border-radius:15px;background:#ece9ff;color:var(--purple);display:grid;place-items:center;font-size:20px}
 .card{background:var(--card);border-radius:20px;padding:17px;margin:12px 0;box-shadow:0 5px 22px #30235d0a}
 .hero{background:linear-gradient(120deg,#f46e94,#e95381);color:#fff;padding:19px;border-radius:21px;box-shadow:0 8px 22px #e9538130}
-.hero .sub{color:#fff;opacity:.9}.hero strong{font-size:25px;display:block;margin:12px 0 5px;direction:ltr;text-align:right}
+.hero .sub{color:#fff;opacity:.9}
+.hero strong{font-size:25px;display:block;margin:12px 0 5px;direction:ltr;text-align:right}
 .herofoot{display:flex;justify-content:space-between;font-size:11px;opacity:.95;margin-top:12px}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.quick .card{margin:0;min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.quick b{font-size:14px}.quick small{display:block;color:var(--muted);font-size:11px;margin-top:7px}
+.quick .card{margin:0;min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer}
+.quick b{font-size:14px}
+.quick small{display:block;color:var(--muted);font-size:11px;margin-top:7px}
 .qicon{width:38px;height:38px;border-radius:13px;background:#f0edff;color:var(--purple);display:grid;place-items:center;font-size:19px}
-h2{font-size:16px;margin:0 0 14px}.sectionhead{display:flex;align-items:center;justify-content:space-between}
+h2{font-size:16px;margin:0 0 14px}
+.sectionhead{display:flex;align-items:center;justify-content:space-between}
 .link{border:0;background:none;color:var(--purple);font-size:12px;padding:4px;width:auto;margin:0}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
 .stat{background:#fff;border-radius:16px;padding:12px 8px;box-shadow:0 4px 18px #30235d08}
-.stat small{display:block;color:var(--muted);font-size:10px;margin-bottom:8px}.stat b{font-size:12px;direction:ltr;display:block;text-align:right;overflow-wrap:anywhere}
-.income{color:var(--green)}.expense{color:var(--red)}.balance{color:var(--purple)}
+.stat small{display:block;color:var(--muted);font-size:10px;margin-bottom:8px}
+.stat b{font-size:12px;direction:ltr;display:block;text-align:right;overflow-wrap:anywhere}
+.income{color:var(--green)}
+.expense{color:var(--red)}
+.balance{color:var(--purple)}
 canvas{width:100%;height:190px;display:block}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:8px 0 0}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px}
-.donutrow{display:flex;align-items:center;gap:16px}.donutrow canvas{width:145px;height:145px;flex:0 0 145px}
-.catlist{flex:1;font-size:11px;color:var(--muted)}.catitem{display:flex;justify-content:space-between;gap:5px;margin:9px 0}
+.donutrow{display:flex;align-items:center;gap:16px}
+.donutrow canvas{width:145px;height:145px;flex:0 0 145px}
+.catlist{flex:1;font-size:11px;color:var(--muted)}
+.catitem{display:flex;justify-content:space-between;gap:5px;margin:9px 0}
 .entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-.entry:last-child{border:0}.entrytitle{font-size:13px;font-weight:bold}.entrymeta{font-size:10px;color:var(--muted);margin-top:6px}
+.entry:last-child{border:0}
+.entrytitle{font-size:13px;font-weight:bold}
+.entrymeta{font-size:10px;color:var(--muted);margin-top:6px}
 .entryamount{direction:ltr;text-align:left;white-space:nowrap;font-size:12px;font-weight:bold}
 .entryicon{width:37px;height:37px;border-radius:13px;background:#f2efff;color:var(--purple);display:grid;place-items:center;flex:0 0 37px}
-.entryleft{display:flex;align-items:center;gap:10px;min-width:0}.entrytext{min-width:0}
-button,input,select{font:inherit}button,.primary{border:0;border-radius:13px;background:var(--purple);color:#fff;padding:13px 16px;font-weight:bold;cursor:pointer;width:100%}
+.entryleft{display:flex;align-items:center;gap:10px;min-width:0}
+.entrytext{min-width:0}
+button,input,select{font:inherit}
+button,.primary{border:0;border-radius:13px;background:var(--purple);color:#fff;padding:13px 16px;font-weight:bold;cursor:pointer;width:100%}
 .secondary{background:#f0edff;color:var(--purple)}
 label{display:block;font-size:12px;margin:12px 0 6px;color:#55516c}
 input,select{width:100%;border:1px solid #e9e5f2;background:#fff;border-radius:12px;padding:12px;color:var(--ink);outline:none}
@@ -46,67 +61,741 @@ input:focus,select:focus{border-color:#9b8ef0}
 .tabs{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom))}
 .tabwrap{width:100%;max-width:560px;display:flex;justify-content:space-around;align-items:center}
 .tab{width:52px;background:none;color:#9691a7;padding:5px 0;margin:0;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
-.tab .ico{font-size:21px;line-height:24px}.tab.active{color:var(--purple)}
+.tab span{font-size:10px}
+.tab.active{color:var(--purple)}
 .tab.add{background:var(--purple);color:#fff;border-radius:17px;width:48px;height:48px;font-size:22px;box-shadow:0 5px 14px #5743df55}
-.page{display:none}.page.active{display:block}
+.page{display:none}
+.page.active{display:block}
 .empty{text-align:center;color:var(--muted);padding:24px 8px;font-size:12px}
 .pill{display:inline-block;background:#f0edff;color:var(--purple);border-radius:20px;padding:6px 10px;font-size:10px}
-.actions{display:flex;gap:8px}.actions button{flex:1}
+.actions{display:flex;gap:8px}
+.actions button{flex:1}
 .smallmuted{font-size:11px;color:var(--muted);line-height:1.8}
-@media(max-width:370px){.app{padding:14px 11px}.stat b{font-size:10px}.donutrow{gap:8px}.donutrow canvas{width:120px;height:120px;flex-basis:120px}}
+@media(max-width:370px){
+.app{padding:14px 11px}
+.stat b{font-size:10px}
+.donutrow{gap:8px}
+.donutrow canvas{width:120px;height:120px;flex-basis:120px}
+}
 </style>
 </head>
 <body>
 <div class="app">
+
 <section id="home" class="page active">
-<header><div><h1 id="welcomeTitle">سلام! 👋</h1><div class="sub" id="todayLabel">مدیریت دخل‌وخرج روزانه</div></div><div class="avatar">⌂</div></header>
-<div class="hero"><div class="sub">موجودی کل حساب</div><strong id="heroBalance">0</strong><div class="herofoot"><span>وضعیت مالی شما</span><span id="monthLabel"></span></div></div>
-<div class="quick">
-<div class="card" onclick="showPage('add')"><div><b>افزودن درآمد</b><small>ثبت پول دریافتی</small></div><div class="qicon">＋</div></div>
-<div class="card" onclick="showPage('add','expense')"><div><b>افزودن هزینه</b><small>ثبت پرداختی‌ها</small></div><div class="qicon">−</div></div>
+<header>
+<div>
+<h1 id="welcomeTitle">سلام! 👋</h1>
+<div class="sub" id="todayLabel">مدیریت دخل‌وخرج روزانه</div>
 </div>
+<div class="avatar">⌂</div>
+</header>
+
+<div class="hero">
+<div class="sub">موجودی کل حساب</div>
+<strong id="heroBalance">0</strong>
+<div class="herofoot">
+<span>وضعیت مالی شما</span>
+<span id="monthLabel"></span>
+</div>
+</div>
+
+<div class="quick">
+<div class="card" onclick="showPage('add','income')">
+<div><b>افزودن درآمد</b><small>ثبت پول دریافتی</small></div>
+<div class="qicon">＋</div>
+</div>
+<div class="card" onclick="showPage('add','expense')">
+<div><b>افزودن هزینه</b><small>ثبت پرداختی‌ها</small></div>
+<div class="qicon">−</div>
+</div>
+</div>
+
 <div class="stats">
 <div class="stat"><small>کل درآمد</small><b class="income" id="incomeTotal">0</b></div>
 <div class="stat"><small>کل هزینه</small><b class="expense" id="expenseTotal">0</b></div>
 <div class="stat"><small>مانده</small><b class="balance" id="balanceTotal">0</b></div>
 </div>
-<div class="card"><div class="sectionhead"><h2>درآمدها و هزینه‌ها</h2><span class="pill">۶ ماه اخیر</span></div><canvas id="lineChart"></canvas><div class="legend"><span><i class="dot" style="background:#5743df"></i>درآمد</span><span><i class="dot" style="background:#f36b91"></i>هزینه</span></div></div>
-<div class="card"><div class="sectionhead"><h2>آخرین تراکنش‌ها</h2><button class="link" onclick="showPage('reports')">مشاهده همه</button></div><div id="recentList"></div></div>
+
+<div class="card">
+<div class="sectionhead"><h2>درآمدها و هزینه‌ها</h2><span class="pill">۶ ماه اخیر</span></div>
+<canvas id="lineChart"></canvas>
+<div class="legend">
+<span><i class="dot" style="background:#5743df"></i>درآمد</span>
+<span><i class="dot" style="background:#f36b91"></i>هزینه</span>
+</div>
+</div>
+
+<div class="card">
+<div class="sectionhead"><h2>آخرین تراکنش‌ها</h2><button class="link" onclick="showPage('reports')">مشاهده همه</button></div>
+<div id="recentList"></div>
+</div>
 </section>
 
 <section id="charts" class="page">
-<header><div><h1>نمودارها</h1><div class="sub">نمای کلی وضعیت مالی</div></div><div class="avatar">◔</div></header>
-<div class="card"><h2>روند درآمد و هزینه</h2><canvas id="lineChart2"></canvas><div class="legend"><span><i class="dot" style="background:#5743df"></i>درآمد</span><span><i class="dot" style="background:#f36b91"></i>هزینه</span></div></div>
-<div class="card"><h2>هزینه‌ها بر اساس دسته‌بندی</h2><div class="donutrow"><canvas id="donutChart"></canvas><div id="categoryLegend" class="catlist"></div></div></div>
-<div class="stats"><div class="stat"><small>میانگین هزینه</small><b id="avgExpense">0</b></div><div class="stat"><small>تعداد تراکنش</small><b id="countTotal">0</b></div><div class="stat"><small>مانده</small><b id="balanceTotal2">0</b></div></div>
+<header>
+<div><h1>نمودارها</h1><div class="sub">نمای کلی وضعیت مالی</div></div>
+<div class="avatar">◔</div>
+</header>
+<div class="card">
+<h2>روند درآمد و هزینه</h2>
+<canvas id="lineChart2"></canvas>
+<div class="legend">
+<span><i class="dot" style="background:#5743df"></i>درآمد</span>
+<span><i class="dot" style="background:#f36b91"></i>هزینه</span>
+</div>
+</div>
+<div class="card">
+<h2>هزینه‌ها بر اساس دسته‌بندی</h2>
+<div class="donutrow">
+<canvas id="donutChart"></canvas>
+<div id="categoryLegend" class="catlist"></div>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><small>میانگین هزینه</small><b id="avgExpense">0</b></div>
+<div class="stat"><small>تعداد تراکنش</small><b id="countTotal">0</b></div>
+<div class="stat"><small>مانده</small><b id="balanceTotal2">0</b></div>
+</div>
 </section>
 
 <section id="add" class="page">
-<header><div><h1>ثبت تراکنش</h1><div class="sub">درآمد یا هزینه جدیدت رو وارد کن</div></div><div class="avatar">＋</div></header>
+<header>
+<div><h1>ثبت تراکنش</h1><div class="sub">درآمد یا هزینه جدیدت رو وارد کن</div></div>
+<div class="avatar">＋</div>
+</header>
 <div class="card">
 <form id="form">
-<label>نوع تراکنش</label><div class="grid2"><button type="button" id="incomeBtn" class="secondary" onclick="setType('income')">＋ درآمد</button><button type="button" id="expenseBtn" onclick="setType('expense')">− هزینه</button></div>
-<input type="hidden" id="type" value="expense">
-<label>مبلغ (تومان)</label><input id="amount" inputmode="numeric" placeholder="مثلاً 1,250,000" required>
-<label>بابت چی بوده؟</label><input id="reason" maxlength="100" placeholder="مثلاً خرید روزانه" required>
-<div class="grid2"><div><label>سال شمسی</label><input id="jy" inputmode="numeric" maxlength="4" required></div><div><label>ماه</label><select id="jm"><option value="1">فروردین</option><option value="2">اردیبهشت</option><option value="3">خرداد</option><option value="4">تیر</option><option value="5">مرداد</option><option value="6">شهریور</option><option value="7">مهر</option><option value="8">آبان</option><option value="9">آذر</option><option value="10">دی</option><option value="11">بهمن</option><option value="12">اسفند</option></select></div></div>
-<label>روز</label><input id="jd" inputmode="numeric" maxlength="2" required>
-<label>دسته‌بندی</label><select id="category"><option>عمومی</option><option>خوراک</option><option>رفت‌وآمد</option><option>خرید</option><option>حقوق</option><option>فروش</option><option>قبض و خدمات</option><option>درمان</option><option>تفریح</option><option>سایر</option></select>
+<label>نوع تراکنش</label>
+<div class="grid2">
+<button type="button" id="incomeBtn" class="secondary" onclick="setType('income')">＋ درآمد</button>
+<button type="button" id="expenseBtn" onclick="setType('expense')">− هزینه</button>
+</div>
+<input type="hidden" id="type" value="income">
+
+<label>مبلغ (تومان)</label>
+<input id="amount" inputmode="numeric" placeholder="مثلاً 1,250,000" required>
+
+<label>بابت چی بوده؟</label>
+<input id="reason" maxlength="100" placeholder="مثلاً خرید روزانه" required>
+
+<div class="grid2">
+<div>
+<label>سال شمسی</label>
+<input id="jy" inputmode="numeric" maxlength="4" required>
+</div>
+<div>
+<label>ماه</label>
+<select id="jm">
+<option value="1">فروردین</option><option value="2">اردیبهشت</option>
+<option value="3">خرداد</option><option value="4">تیر</option>
+<option value="5">مرداد</option><option value="6">شهریور</option>
+<option value="7">مهر</option><option value="8">آبان</option>
+<option value="9">آذر</option><option value="10">دی</option>
+<option value="11">بهمن</option><option value="12">اسفند</option>
+</select>
+</div>
+</div>
+
+<label>روز</label>
+<input id="jd" inputmode="numeric" maxlength="2" required>
+
+<label>دسته‌بندی</label>
+<select id="category">
+<option>عمومی</option><option>خوراک</option><option>رفت‌وآمد</option>
+<option>خرید</option><option>حقوق</option><option>فروش</option>
+<option>قبض و خدمات</option><option>درمان</option><option>تفریح</option><option>سایر</option>
+</select>
+
 <button type="submit" style="margin-top:18px">ذخیره تراکنش</button>
-</form></div>
+</form>
+</div>
 <div class="smallmuted">تاریخ به‌صورت شمسی ذخیره می‌شود. اطلاعات روی همین دستگاه نگهداری می‌شود.</div>
 </section>
 
 <section id="reports" class="page">
-<header><div><h1>گزارش‌ها</h1><div class="sub">گزارش تراکنش‌های ثبت‌شده</div></div><div class="avatar">▤</div></header>
-<div class="stats"><div class="stat"><small>درآمد</small><b class="income" id="reportIncome">0</b></div><div class="stat"><small>هزینه</small><b class="expense" id="reportExpense">0</b></div><div class="stat"><small>مانده</small><b class="balance" id="reportBalance">0</b></div></div>
-<div class="card"><div class="sectionhead"><h2>همه تراکنش‌ها</h2><span class="pill" id="reportCount">۰ مورد</span></div><div id="allList"></div></div>
+<header>
+<div><h1>گزارش‌ها</h1><div class="sub">گزارش تراکنش‌های ثبت‌شده</div></div>
+<div class="avatar">▤</div>
+</header>
+<div class="stats">
+<div class="stat"><small>درآمد</small><b class="income" id="reportIncome">0</b></div>
+<div class="stat"><small>هزینه</small><b class="expense" id="reportExpense">0</b></div>
+<div class="stat"><small>مانده</small><b class="balance" id="reportBalance">0</b></div>
+</div>
+<div class="card">
+<div class="sectionhead"><h2>همه تراکنش‌ها</h2><span class="pill" id="reportCount">۰ مورد</span></div>
+<div id="allList"></div>
+</div>
 </section>
 
 <section id="settings" class="page">
-<header><div><h1>تنظیمات</h1><div class="sub">شخصی‌سازی برنامه</div></div><div class="avatar">⚙</div></header>
-<div class="card"><h2>شخصی‌سازی خوشامدگویی</h2><label>اسم دلخواهت</label><input id="userName" maxlength="30" placeholder="مثلاً سعید"><button onclick="saveName()">ذخیره اسم</button><p class="smallmuted">این اسم در بالای صفحه خانه نمایش داده می‌شود.</p></div>
-<div class="card"><h2>ظاهر برنامه</h2><label>رنگ زمینه</label><input id="bgColor" type="color" value="#f7f6fc"><label>رنگ اصلی</label><input id="mainColor" type="color" value="#5743df"><label>فونت</label><select id="fontChoice"><option value="Tahoma,Arial,sans-serif">Tahoma</option><option value="Arial,sans-serif">Arial</option><option value="system-ui,sans-serif">System</option><option value="Georgia,serif">Georgia</option></select><button onclick="saveStyle()">ذخیره تنظیمات</button></div>
-<div class="card"><h2>پشتیبان‌گیری</h2><p class="smallmuted">برای نگهداری امن اطلاعات، می‌تونی از تراکنش‌هات فایل پشتیبان بگیری.</p><div class="actions"><button onclick="backup()">خروجی گرفتن</button><button class="secondary" onclick="document.getElementById('restoreFile').click()">بازیابی فایل</button></div><input id="restoreFile" type="file" accept="application/json" hidden onchange="restore(event)"></div>
-<div class="card"><h2>اطلاعات برنامه</h2><div class="smallmuted">نسخه شخصی دخل‌وخرج · ذخیره‌سازی محلی روی دستگاه</div></div>
+<header>
+<div><h1>تنظیمات</h1><div class="sub">شخصی‌سازی برنامه</div></div>
+<div class="avatar">⚙</div>
+</header>
+<div class="card">
+<h2>شخصی‌سازی خوشامدگویی</h2>
+<label>اسم دلخواهت</label>
+<input id="userName" maxlength="30" placeholder="مثلاً سعید">
+<button onclick="saveName()">ذخیره اسم</button>
+<p class="smallmuted">این اسم در بالای صفحه خانه نمایش داده می‌شود.</p>
+</div>
+<div class="card">
+<h2>ظاهر برنامه</h2>
+<label>رنگ زمینه</label>
+<input id="bgColor" type="color" value="#f7f6fc">
+<label>رنگ اصلی</label>
+<input id="mainColor" type="color" value="#5743df">
+<label>فونت</label>
+<select id="fontChoice">
+<option value="Tahoma,Arial,sans-serif">Tahoma</option>
+<option value="Arial,sans-serif">Arial</option>
+<option value="system-ui,sans-serif">System</option>
+<option value="Georgia,serif">Georgia</option>
+</select>
+<button onclick="saveStyle()">ذخیره تنظیمات</button>
+</div>
+<div class="card">
+<h2>پشتیبان‌گیری</h2>
+<p class="smallmuted">برای نگهداری امن اطلاعات، می‌تونی از تراکنش‌هات فایل پشتیبان بگیری.</p>
+<div class="actions">
+<button onclick="backup()">خروجی گرفتن</button>
+<button class="secondary" onclick="document.getElementById('restoreFile').click()">بازیابی فایل</button>
+</div>
+<input id="restoreFile" type="file" accept="application/json" hidden onchange="restore(event)">
+</div>
+<div class="card">
+<h2>اطلاعات برنامه</h2>
+<div class="smallmuted">نسخه شخصی دخل‌وخرج · ذخیره‌سازی محلی روی دستگاه</div>
+</div>
 </section>
+
+</div>
+
+<nav class="tabs">
+<div class="tabwrap">
+<button class="tab active" data-page="home" onclick="showPage('home')">⌂<span>خانه</span></button>
+<button class="tab" data-page="charts" onclick="showPage('charts')">◔<span>نمودار</span></button>
+<button class="tab add" data-page="add" onclick="showPage('add','income')">＋</button>
+<button class="tab" data-page="reports" onclick="showPage('reports')">▤<span>گزارش</span></button>
+<button class="tab" data-page="settings" onclick="showPage('settings')">⚙<span>تنظیمات</span></button>
+</div>
+</nav>
+
+<script>
+'use strict';
+
+const $ = id => document.getElementById(id);
+const fmt = n => Number(n || 0).toLocaleString('en-US');
+
+let entries = [];
+try {
+  entries = JSON.parse(localStorage.getItem('dk_entries') || '[]');
+  if (!Array.isArray(entries)) entries = [];
+} catch(e) {
+  entries = [];
+}
+
+function saveEntries() {
+  localStorage.setItem('dk_entries', JSON.stringify(entries));
+}
+
+const jf = new Intl.DateTimeFormat(
+  'en-US-u-ca-persian-nu-latn',
+  {year:'numeric',month:'numeric',day:'numeric'}
+);
+
+function todayJ() {
+  const p = {};
+  jf.formatToParts(new Date()).forEach(x => p[x.type] = x.value);
+  return {y:+p.year,m:+p.month,d:+p.day};
+}
+
+function isLeapJ(y) {
+  const r = ((y - 474) % 2820 + 2820) % 2820 + 474;
+  return (((r + 38) * 682) % 2816) < 682;
+}
+
+function daysInMonth(y,m) {
+  if (m < 1 || m > 12) return 0;
+  if (m <= 6) return 31;
+  if (m <= 11) return 30;
+  return isLeapJ(y) ? 30 : 29;
+}
+
+function initDate() {
+  const t = todayJ();
+  $('jy').value = t.y;
+  $('jm').value = t.m;
+  $('jd').value = t.d;
+  $('todayLabel').textContent =
+    'امروز ' + t.y + '/' +
+    String(t.m).padStart(2,'0') + '/' +
+    String(t.d).padStart(2,'0');
+  $('monthLabel').textContent = 'ماه ' + t.m + ' سال ' + t.y;
+}
+
+function jalaliDate(s) {
+  if (!s) return '';
+  if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(s)) return s;
+
+  const d = new Date(s);
+  if (isNaN(d)) return s;
+
+  const p = {};
+  jf.formatToParts(d).forEach(x => p[x.type] = x.value);
+
+  return p.year + '/' +
+    String(p.month).padStart(2,'0') + '/' +
+    String(p.day).padStart(2,'0');
+}
+
+function showPage(page,type) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  $(page).classList.add('active');
+
+  document.querySelectorAll('.tab').forEach(x => {
+    x.classList.toggle('active', x.dataset.page === page);
+  });
+
+  if (page === 'add') {
+    if (type) setType(type);
+    const t = todayJ();
+    if (!$('jy').value) {
+      $('jy').value = t.y;
+      $('jm').value = t.m;
+      $('jd').value = t.d;
+    }
+  }
+
+  renderAll();
+  window.scrollTo(0,0);
+}
+
+function setType(type) {
+  $('type').value = type;
+  $('incomeBtn').className = type === 'income' ? '' : 'secondary';
+  $('expenseBtn').className = type === 'expense' ? '' : 'secondary';
+}
+
+function totals() {
+  let inc = 0;
+  let exp = 0;
+
+  entries.forEach(x => {
+    if (x.type === 'income') inc += Number(x.amount);
+    if (x.type === 'expense') exp += Number(x.amount);
+  });
+
+  return {inc,exp,bal:inc-exp};
+}
+
+$('amount').addEventListener('input', e => {
+  let v = e.target.value.replace(/[^0-9]/g,'');
+  e.target.value = v ? fmt(v) : '';
+});
+
+$('form').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const amount = Number($('amount').value.replace(/,/g,''));
+  const y = Number($('jy').value);
+  const m = Number($('jm').value);
+  const d = Number($('jd').value);
+  const reason = $('reason').value.trim();
+
+  if (!amount || amount <= 0) {
+    alert('مبلغ معتبر وارد کن.');
+    return;
+  }
+
+  if (!reason) {
+    alert('شرح تراکنش را وارد کن.');
+    return;
+  }
+
+  if (y < 1300 || y > 1500 || m < 1 || m > 12 || d < 1 || d > daysInMonth(y,m)) {
+    alert('تاریخ شمسی معتبر وارد کن.');
+    return;
+  }
+
+  entries.push({
+    id: Date.now(),
+    type: $('type').value,
+    amount: amount,
+    reason: reason,
+    date: y + '/' + String(m).padStart(2,'0') + '/' + String(d).padStart(2,'0'),
+    category: $('category').value
+  });
+
+  saveEntries();
+  $('amount').value = '';
+  $('reason').value = '';
+
+  renderAll();
+  alert('تراکنش با موفقیت ذخیره شد.');
+  showPage('home');
+});
+
+function entryNode(x) {
+  const el = document.createElement('div');
+  el.className = 'entry';
+
+  const left = document.createElement('div');
+  left.className = 'entryleft';
+
+  const icon = document.createElement('div');
+  icon.className = 'entryicon';
+  icon.textContent = x.type === 'income' ? '＋' : '−';
+
+  const text = document.createElement('div');
+  text.className = 'entrytext';
+
+  const title = document.createElement('div');
+  title.className = 'entrytitle';
+  title.textContent = x.reason || 'بدون شرح';
+
+  const meta = document.createElement('div');
+  meta.className = 'entrymeta';
+  meta.textContent = (x.category || 'عمومی') + ' · ' + jalaliDate(x.date);
+
+  text.append(title,meta);
+  left.append(icon,text);
+
+  const right = document.createElement('div');
+  right.className = 'entryamount ' + x.type;
+  right.textContent = (x.type === 'income' ? '+' : '−') + fmt(x.amount);
+
+  el.append(left,right);
+  return el;
+}
+
+function fillList(id,arr) {
+  const box = $(id);
+  box.innerHTML = '';
+
+  if (!arr.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty';
+    empty.textContent = 'هنوز تراکنشی ثبت نکردی.';
+    box.append(empty);
+    return;
+  }
+
+  arr.forEach(x => {
+    const node = entryNode(x);
+    const del = document.createElement('button');
+    del.className = 'link';
+    del.textContent = 'حذف';
+
+    del.onclick = () => {
+      if (confirm('این تراکنش حذف شود؟')) {
+        entries = entries.filter(y => y.id !== x.id);
+        saveEntries();
+        renderAll();
+      }
+    };
+
+    node.append(del);
+    box.append(node);
+  });
+}
+
+function monthKey(x) {
+  return jalaliDate(x.date).slice(0,7);
+}
+
+function monthly() {
+  const t = todayJ();
+  const keys = [];
+
+  for (let i=5; i>=0; i--) {
+    let m = t.m-i;
+    let y = t.y;
+
+    while (m <= 0) {
+      m += 12;
+      y--;
+    }
+
+    keys.push(y + '/' + String(m).padStart(2,'0'));
+  }
+
+  return keys.map(k => {
+    const list = entries.filter(x => monthKey(x) === k);
+
+    return {
+      k,
+      inc: list.filter(x => x.type === 'income').reduce((a,x) => a + Number(x.amount),0),
+      exp: list.filter(x => x.type === 'expense').reduce((a,x) => a + Number(x.amount),0)
+    };
+  });
+}
+
+function drawLine(id) {
+  const canvas = $(id);
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const w = canvas.clientWidth || 300;
+  const h = 190;
+  const ratio = window.devicePixelRatio || 1;
+
+  canvas.width = w * ratio;
+  canvas.height = h * ratio;
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+
+  const data = monthly();
+  const max = Math.max(1,...data.flatMap(x => [x.inc,x.exp]));
+  const pad = {l:10,r:10,t:15,b:28};
+  const cw = w-pad.l-pad.r;
+  const ch = h-pad.t-pad.b;
+
+  ctx.clearRect(0,0,w,h);
+  ctx.font = '10px Tahoma';
+  ctx.textAlign = 'center';
+
+  for (let j=0;j<4;j++) {
+    const y = pad.t + ch*j/3;
+    ctx.strokeStyle = '#eeeaf7';
+    ctx.beginPath();
+    ctx.moveTo(pad.l,y);
+    ctx.lineTo(w-pad.r,y);
+    ctx.stroke();
+  }
+
+  function line(key,color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+
+    data.forEach((v,i) => {
+      const x = pad.l + cw*i/(data.length-1);
+      const y = pad.t + ch - (v[key]/max)*ch;
+      if (i === 0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
+    });
+
+    ctx.stroke();
+
+    data.forEach((v,i) => {
+      const x = pad.l + cw*i/(data.length-1);
+      const y = pad.t + ch - (v[key]/max)*ch;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x,y,3,0,Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  line('inc','#5743df');
+  line('exp','#f36b91');
+
+  ctx.fillStyle = '#8b879d';
+  data.forEach((v,i) => {
+    const x = pad.l + cw*i/(data.length-1);
+    ctx.fillText(v.k.slice(5),x,h-8);
+  });
+}
+
+function drawDonut() {
+  const c = $('donutChart');
+  const ctx = c.getContext('2d');
+  const w = c.clientWidth || 145;
+  const h = 145;
+  const ratio = window.devicePixelRatio || 1;
+
+  c.width = w*ratio;
+  c.height = h*ratio;
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.clearRect(0,0,w,h);
+
+  const map = {};
+  entries.filter(x => x.type === 'expense').forEach(x => {
+    const cat = x.category || 'عمومی';
+    map[cat] = (map[cat] || 0) + Number(x.amount);
+  });
+
+  const data = Object.entries(map).sort((a,b) => b[1]-a[1]).slice(0,6);
+  const sum = data.reduce((s,x) => s+x[1],0);
+  const colors = ['#5743df','#f36b91','#8f7df1','#ffc46b','#4bbda0','#7a8da8'];
+  const cx = w/2;
+  const cy = h/2;
+  const r = Math.min(w,h)*.42;
+  const inner = r*.58;
+
+  if (!sum) {
+    ctx.strokeStyle = '#eeeaf7';
+    ctx.lineWidth = r-inner;
+    ctx.beginPath();
+    ctx.arc(cx,cy,(r+inner)/2,0,Math.PI*2);
+    ctx.stroke();
+  } else {
+    let start = -Math.PI/2;
+    data.forEach((v,i) => {
+      const end = start + v[1]/sum*Math.PI*2;
+      ctx.strokeStyle = colors[i];
+      ctx.lineWidth = r-inner;
+      ctx.beginPath();
+      ctx.arc(cx,cy,(r+inner)/2,start,end);
+      ctx.stroke();
+      start = end;
+    });
+  }
+
+  ctx.fillStyle = '#24213a';
+  ctx.font = 'bold 12px Tahoma';
+  ctx.textAlign = 'center';
+  ctx.fillText(fmt(sum),cx,cy+4);
+
+  const legend = $('categoryLegend');
+  legend.innerHTML = '';
+
+  if (!data.length) {
+    legend.textContent = 'هنوز هزینه‌ای ثبت نشده';
+    return;
+  }
+
+  data.forEach((v,i) => {
+    const row = document.createElement('div');
+    row.className = 'catitem';
+
+    const name = document.createElement('span');
+    const dot = document.createElement('i');
+    dot.className = 'dot';
+    dot.style.background = colors[i];
+    name.append(dot,document.createTextNode(v[0]));
+
+    const amount = document.createElement('b');
+    amount.textContent = fmt(v[1]);
+
+    row.append(name,amount);
+    legend.append(row);
+  });
+}
+
+function renderAll() {
+  const t = totals();
+
+  ['incomeTotal','reportIncome'].forEach(id => $(id).textContent = fmt(t.inc));
+  ['expenseTotal','reportExpense'].forEach(id => $(id).textContent = fmt(t.exp));
+  ['balanceTotal','balanceTotal2','reportBalance'].forEach(id => $(id).textContent = fmt(t.bal));
+
+  $('heroBalance').textContent = fmt(t.bal) + ' تومان';
+  $('countTotal').textContent = fmt(entries.length);
+  $('reportCount').textContent = fmt(entries.length) + ' مورد';
+
+  const expenses = entries.filter(x => x.type === 'expense');
+  const avg = expenses.length ? t.exp/expenses.length : 0;
+  $('avgExpense').textContent = fmt(avg);
+
+  const sorted = [...entries].sort((a,b) => b.id-a.id);
+  fillList('recentList',sorted.slice(0,4));
+  fillList('allList',sorted);
+
+  if ($('home').classList.contains('active')) drawLine('lineChart');
+
+  if ($('charts').classList.contains('active')) {
+    drawLine('lineChart2');
+    drawDonut();
+  }
+}
+
+function saveName() {
+  localStorage.setItem('dk_user_name',$('userName').value.trim());
+  applyName();
+  alert('اسم ذخیره شد.');
+}
+
+function applyName() {
+  const n = localStorage.getItem('dk_user_name') || '';
+  $('userName').value = n;
+  $('welcomeTitle').textContent = n ? 'سلام، ' + n + '! 👋' : 'سلام! 👋';
+}
+
+function saveStyle() {
+  const bg = $('bgColor').value;
+  const main = $('mainColor').value;
+  const font = $('fontChoice').value;
+
+  document.documentElement.style.setProperty('--bg',bg);
+  document.documentElement.style.setProperty('--purple',main);
+  document.body.style.fontFamily = font;
+
+  localStorage.setItem('dk_style',JSON.stringify({bg,main,font}));
+  alert('تنظیمات ذخیره شد.');
+}
+
+function loadStyle() {
+  try {
+    const s = JSON.parse(localStorage.getItem('dk_style') || 'null');
+    if (s) {
+      $('bgColor').value = s.bg;
+      $('mainColor').value = s.main;
+      $('fontChoice').value = s.font;
+      document.documentElement.style.setProperty('--bg',s.bg);
+      document.documentElement.style.setProperty('--purple',s.main);
+      document.body.style.fontFamily = s.font;
+    }
+  } catch(e) {}
+}
+
+function backup() {
+  const blob = new Blob([JSON.stringify(entries,null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'dakhl-kharj-backup.json';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url),1000);
+}
+
+function restore(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (!Array.isArray(data)) throw new Error();
+
+      entries = data;
+      saveEntries();
+      renderAll();
+      alert('اطلاعات بازیابی شد.');
+    } catch(err) {
+      alert('فایل پشتیبان معتبر نیست.');
+    }
+    e.target.value = '';
+  };
+
+  reader.readAsText(file);
+}
+
+/* اجرای اولیه */
+initDate();
+setType('income');
+loadStyle();
+applyName();
+renderAll();
+
+window.addEventListener('resize',() => {
+  if ($('home').classList.contains('active')) drawLine('lineChart');
+  if ($('charts').classList.contains('active')) {
+    drawLine('lineChart2');
+    drawDonut();
+  }
+});
+
+/* ذخیره آفلاین پس از اولین بارگذاری آنلاین */
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load',() => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
